@@ -1,4 +1,8 @@
-Mars-Http-Server-
+Mars HTTP Server
+=================
+created by Stavros Skourtis
+
+
 =================
 
-Http server
+It is work in progress. More information about how to use or how it works will be released later in time.
