@@ -10,25 +10,30 @@ package mars.http;
  * @author Phenom
  */
 public class HTTPStatus {
-    public static final String _204="HTTP/1.1 204 No Content\r\n" +
-                                    "Date: "+ServerUtils.getServerTime()+"\r\n" +
-                                    "Server: http server\r\n" +
-                                    "Content-type: text/html\r\n" +
-                                    "Connection: Closed\r\n\r\n";
+    public static final String HTTP_VERSION = "HTTP/1.1";
+    public static final String SERVER_NAME ="Mars alpha 1.0.0";
     
-    public static final String _400="HTTP/1.1 400 Bad Request\r\n\r\n";
+    public static final String _204= HTTP_VERSION+" 204 No Content\r\n" +
+                                    "Date: "+ServerUtils.getServerTime()+"\r\n" +
+                                    "Server: "+SERVER_NAME+"\r\n" +
+                                    "Content-type: text/html\r\n" +
+                                    "Connection: keep-alive\r\n\r\n";
+    
+    public static final String _304= HTTP_VERSION+" 304 Not Modified\r\n" +
+                                    "Date: "+ServerUtils.getServerTime()+"\r\n" +
+                                    "Server: "+SERVER_NAME+"\r\n" +
+                                    "Keep-Alive: keep-alive\r\n" +
+                                    "Cache-Control: max-age=21600\r\n\r\n";
+    
+    public static final String _400=HTTP_VERSION+" 400 Bad Request\r\n\r\n";
     public static final String _401="";
     public static final String _402="";
     public static final String _403="";
-    public static final String _404="HTTP/1.1 404 Not Found\r\n"+
+    public static final String _404=HTTP_VERSION+" 404 Not Found\r\n"+
                                     "Date: "+ServerUtils.getServerTime()+"\r\n" +
-                                    "Server: http server made with java\r\n" +
-                                    "Vary: Accept-Encoding\r\n" +
-                                    "Content-Encoding: gzip\r\n" +
-                                    "Content-Length: 246\r\n" +
-                                    "Keep-Alive: timeout=15, max=99\r\n" +
+                                    "Server: "+SERVER_NAME+"\r\n" +                       
                                     "Connection: Keep-Alive\r\n" +
-                                    "Content-Type: text/html; charset=iso-8859-1\r\n\r\n\r\n";
+                                    "\r\n";
                                     
     public static final String _405="";
     public static final String _406="";

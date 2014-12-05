@@ -1,0 +1,26 @@
+<httpmethods>
+    <method name="get" allow="true" />
+    <method name="post" allow="true" />
+    <method name="trace" allow="true" />
+    <method name="head" allow="true" />
+    <method name="put" allow="true" />
+    <method name="delete" allow="true" />
+    <method name="connect" allow="true" />
+    <method name="options" allow="true" />
+</httpmethods>
+
+<sites>
+    <website path="./www" port="" ssl="false" />
+    <website path="./w1" port="" ssl="false" />
+    <website path="./w2" port="" ssl="false" />
+    <website path="./w3" port="" ssl="false" />
+</sites>
+
+<defaults>
+    <page value="index.html" weight="1" />
+    <page value="index.htm" weight="2" />
+    <page value="default.html" weight="3" />
+    <page value="default.htm" weight="4" />    
+</defaults>
+
+<php allow="true" path="" />
