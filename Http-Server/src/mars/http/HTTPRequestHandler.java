@@ -5,6 +5,7 @@ import mars.http.HTTPServer;
 import java.io.*;
 import java.util.ArrayList;
 import static mars.http.HTTPStatus.*;
+import mars.utils.Config;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -140,19 +141,33 @@ public class HTTPRequestHandler {
     
     public void getResponse() throws IOException{
         /*
+            If protocol is not HTTP/1.1 or HTTP/1.0 is is not suported
+        */
+        if(! (protocolVersion.equals("HTTP/1.1") || protocolVersion.equals("HTTP/1.0") )){
+            outStream.writeBytes(_505);
+            return;
+        }
+        
+        /*
             The request MUST contain a host header field
         */
-        
         if(host==null){
             outStream.writeBytes(_400);
             return;
         }
+        
+        /*
+            If true the project is modified
+        */
         if (ifUnModifiedSince == 0 && urlFile.exists()){ 
             outStream.writeBytes(_412);
             return;
         }
         
-        if( ifModifiedSince == 0){
+        /*
+            If true the project is not modified , so 304 status code is send back
+        */
+        if( ifModifiedSince == 0 && urlFile.exists()){
             outStream.writeBytes(_304);
             return;
         }
@@ -164,21 +179,45 @@ public class HTTPRequestHandler {
                 a   400    response   is  sent   back
                                                             */  
         if(method.equalsIgnoreCase("GET")){
-            get();
+            if(Config.GET)
+                get();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("POST")){
-            post();
+            if(Config.POST)
+                post();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("HEAD")){
-            head();
+            if(Config.HEAD)
+                head();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("PUT")){
-            put();
+            if(Config.PUT)
+                put();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("DELETE")){
-            delete();
+            if(Config.DELETE)
+                delete();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("CONNECT")){
-            connect();
+            if(Config.CONNECT)
+                connect();
+            else
+                outStream.writeBytes(_405);
         }else if(method.equalsIgnoreCase("TRACE")){
-            trace();
-        }else if(method.equalsIgnoreCase("OPTIONS")){
-            options();
+            if(Config.TRACE)
+                trace();
+            else
+                outStream.writeBytes(_405);
+        }else if(method.equalsIgnoreCase("OPTIONS") && Config.OPTIONS){
+            if(Config.OPTIONS)
+                options();
+            else
+                outStream.writeBytes(_405);
         }else{
             outStream.writeBytes(_400);
         };

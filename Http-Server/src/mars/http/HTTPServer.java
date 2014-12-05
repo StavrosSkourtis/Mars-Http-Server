@@ -14,29 +14,26 @@ import java.util.ArrayList;
  */
 public class HTTPServer extends Thread{
     
-    public static int SERVER_PORT = 81;
     public static ArrayList<String> requests;
     public static String[] defaultPages;
    
     private final ServerSocket serverSocket;
     
-    public HTTPServer() throws IOException{
+    public HTTPServer(int portNumber) throws IOException{
         // create the server's socket
-        serverSocket = new ServerSocket(SERVER_PORT);
-        
-        // default file names
-        defaultPages = new String[]{"index.html" ,"index.htm"};
+        HTTPStatus.init();
+        serverSocket = new ServerSocket(portNumber);
     }
-    
+        
     @Override
     public void run(){
         while(true){
             try{
                 // Listen for new requests and accept them
-                Socket server = serverSocket.accept();
+                Socket client = serverSocket.accept();
                 
                 // Start a new thread for every request and go back go listening
-                new ServerClientThread(server).start();
+                new ServerClientThread(client).start();
             }catch(IOException e){
                 
             }
