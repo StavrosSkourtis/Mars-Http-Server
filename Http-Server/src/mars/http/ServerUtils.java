@@ -119,6 +119,8 @@ public class ServerUtils {
             DataInputStream reader = new DataInputStream(new FileInputStream(file));
             for(int i=0;i<data.length;i++)
                 data[i] = reader.readByte();
+            
+            reader.close();
         }catch(Exception e){}
         return data;
     }

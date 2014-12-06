@@ -1,5 +1,7 @@
 package mars.http;
 
+import mars.utils.Config;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,71 +13,141 @@ package mars.http;
  */
 public class HTTPStatus {
     public static final String HTTP_VERSION = "HTTP/1.1";
-    public static final String SERVER_NAME ="Mars alpha 1.0.0";
+    public static final String SERVER_NAME ="Mars alpha 1.0.0";    
     
-    public static final String _204= HTTP_VERSION+" 204 No Content\r\n" +
-                                    "Date: "+ServerUtils.getServerTime()+"\r\n" +
-                                    "Server: "+SERVER_NAME+"\r\n" +
-                                    "Content-type: text/html\r\n" +
-                                    "Connection: keep-alive\r\n\r\n";
+    /**
+     * @return 204 NO CONTENT Response
+     */
+    public static HTTPResponse code204(){
+        HTTPResponse response = new HTTPResponse();
+                
+        response.setStatusCode(HTTP_VERSION+" 204 No Content");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");
+        response.addHeader("Content-Type","text/html");
+        
+        
+        return response;
+    }
     
-    public static final String _304= HTTP_VERSION+" 304 Not Modified\r\n" +
-                                    "Date: "+ServerUtils.getServerTime()+"\r\n" +
-                                    "Server: "+SERVER_NAME+"\r\n" +
-                                    "Keep-Alive: keep-alive\r\n" +
-                                    "Cache-Control: max-age=21600\r\n\r\n";
+    /**
+     * @return 304 NOT MODIFIED Response
+     */
+    public static HTTPResponse code304(){
+        HTTPResponse response = new HTTPResponse();
+        
+        response.setStatusCode(HTTP_VERSION+" 304 Not Modified");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");
+        response.addHeader("Vary","Accept-Encoding");
+        
+        return response;
+    }
     
-    public static final String _400=HTTP_VERSION+" 400 Bad Request\r\n\r\n";
-    public static final String _401="";
-    public static final String _402="";
-    public static final String _403="";
-    public static String _404;
-                                    
-    public static final String _405="";
-    public static final String _406="";
-    public static final String _407="";
-    public static final String _408="";
-    public static final String _409="";
-    public static final String _410="";
-    public static final String _411="";
-    public static final String _412="";
-    public static final String _413="";
-    public static final String _414="";
-    public static final String _415="";
-    public static final String _416="";
-    public static final String _417="";
-
-    public static final String _500="";
-    public static final String _501="";
-    public static final String _502="";
-    public static final String _503="";
-    public static final String _504="";
-    public static final String _505="";
+    /**
+     * @return 400 BAD REQUEST Response
+     */
+    public static HTTPResponse code400(){
+        HTTPResponse response = new HTTPResponse();
+        
+        response.setStatusCode(HTTP_VERSION+" 400 Bad Request");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");
+        
+        return response;
+    }
     
-    
-    public static void init(){
+    /**
+     * @return 404 NOT FOUND Response 
+     */
+    public static HTTPResponse code404(){
+        HTTPResponse response = new HTTPResponse();
+        
         String body404 = "<html><head>\n" +
                             "<title>404 Not Found</title>\n" +
                             "</head><body>\n" +
-                            "<h1>Not Found</h1>\n" +
+                            "<h1>404 Not Found</h1>\n" +
                             "<p>The requested URL was not found on this server.</p>\n" +
                             "<hr>\n" +
-                            "<address>"+SERVER_NAME+"</address>\n" +
+                            "<p>"+SERVER_NAME+"</p>\n" +
                             "</body></html>";
         
-        _404= HTTP_VERSION+" 404 Not Found\r\n"+
-             "Date: "+ServerUtils.getServerTime()+"\r\n" +
-             "Server: "+SERVER_NAME+"\r\n" +
-             "Content-Length : "+body404.getBytes().length+"\r\n"+
-             "Connection: Keep-Alive\r\n"+ 
-             "Vary: Accept-Encoding\r\n" +
-             "Content-Length: 246\r\n" +
-             "Keep-Alive: timeout=15, max=100\r\n" +
-             "Content-Type: text/html\r\n" +
-             "\r\n"+body404;
+        response.setStatusCode(HTTP_VERSION+" 404 Not Found");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");
+        response.addHeader("Content-Length",String.valueOf( body404.getBytes().length) );
+        response.addHeader("Content-Type","text/html");
         
+        response.addBody(body404.getBytes());
         
-             
+        return response;
+    }
+    
+    /**
+     * @return 405 METHOD NOT ALLOWED Response
+     */
+    public static HTTPResponse code405(){
+        HTTPResponse response = new HTTPResponse();
+        
+        String allow= "";
+        
+        if(Config.GET)
+            allow+="GET";
+        else if(Config.POST)
+            allow+=",POST";
+        else if(Config.HEAD)
+            allow+=",HEAD";
+        else if(Config.TRACE)
+            allow+=",TRACE";
+        else if(Config.OPTIONS)
+            allow+=",OPTIONS";
+        else if(Config.DELETE)
+            allow+=",DELETE";
+        else if(Config.PUT)
+            allow+=",PUT";
+        else if(Config.CONNECT)
+            allow+=",CONNECT";
+        
+        response.setStatusCode(HTTP_VERSION+" 405 Method Not Allowed");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("allow", allow);
+        response.addHeader("Connection","keep-alive");
+        response.addHeader("Content-Type","text/html");
+                
+        return response;
+    }
+    
+    /**
+     * @return 412 PRECONDITION FAILED Response 
+     */
+    public static HTTPResponse code412(){
+        HTTPResponse response = new HTTPResponse();
+        
+        response.setStatusCode(HTTP_VERSION+" 412 Precondition Failed");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");        
+        
+        return response;
+    }
+    
+    /**
+     * @return 505 HTTP VERSION NOT SUPORTED Response
+     */
+    public static HTTPResponse code505(){
+        HTTPResponse response = new HTTPResponse();
+        
+        response.setStatusCode(HTTP_VERSION+" 505 HTTP Version Not Supported");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");        
+        
+        return response;
     }
         
 }

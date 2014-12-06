@@ -28,7 +28,7 @@ import mars.utils.Logger;
 public class GuiLauncher {
     public GuiLauncher() throws IOException{
         ServerOptions gui= new ServerOptions();
-        
+        About guiAbout = new About();
         // java 1.6 and above supports System Tray applications
         if(SystemTray.isSupported()){
             
@@ -48,19 +48,20 @@ public class GuiLauncher {
             //Add Listeners
             // We need this one for double clicking on tray and when options is clicked
             // starts options gui
-            ActionListener listener = new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    gui.setVisible(!gui.isVisible());
-                }
+            ActionListener listener = (ActionEvent e) -> {
+                gui.setVisible(!gui.isVisible());
             };
+            
             options.addActionListener(listener);
-            exit.addActionListener(new ActionListener() { 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //Exits application
-                    Logger.dispose();
-                    System.exit(0);
-                }
+            
+            about.addActionListener((ActionEvent e) -> {
+                guiAbout.setVisible(!guiAbout.isVisible());
+            });
+            
+            exit.addActionListener((ActionEvent e) -> {
+                //Exits application
+                Logger.dispose();
+                System.exit(0);
             });
             
             // add menu items to the menu

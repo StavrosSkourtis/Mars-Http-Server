@@ -18,157 +18,57 @@ import mars.utils.Config;
  */
 public class HTTPRequestHandler {
     
-    private final ArrayList<String> request;
-    private final ArrayList<String> body;
+    private final HTTPRequest request;
+    private HTTPResponse response;
     private final DataOutputStream outStream;
-    
-    
-    /*
-        Request Line
-    */
-    
-    private String method;
-    private String url;
-    private File urlFile;
-    private String protocolVersion;
-    
-    /*
-        Header fields 
-    */
-    private String host;
-    private String connection;
-    private String date;
-    private String accept;
-    private String authorization;
-    private String cookie;
-    private String range;
-    private String userAgent;
-    private String transferEncoding;
-    
-    /*
-        The following fields are conditional
-        value 10 = not used;
-        value 0 = false;
-        value 1 = true;
-    */
-    private byte ifMatch = 10;
-    private byte ifModifiedSince = 10;
-    private byte ifNoneMatch = 10;
-    private byte ifRange =10;
-    private byte ifUnModifiedSince = 10;
     
     /*
         Constructor
     */
-    public HTTPRequestHandler(ArrayList<String> request,ArrayList<String> body,DataOutputStream outStream){
+    public HTTPRequestHandler(HTTPRequest request,DataOutputStream outStream){
         this.request = request;
-        this.body = body;
         this.outStream = outStream;
+        response = new HTTPResponse();
     }
     
     public boolean process() throws IOException{
-        parseHeaders();
-        getResponse();
+        runMethod();
+        response.send(outStream);
         
-        return !connection.equalsIgnoreCase("close");
+        return request.getHeaderField("connection")!=null && !request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
     }
     
-    /*
-        Parse Header
-    */
-    public void parseHeaders(){
-        
-        /*
-            First we parse the request line
-        */
-              
-        String line[] = request.get(0).split(" ");
-        
-        method = line[0];
-        url = line[1];
-        urlFile = new File("www"+url);
-        protocolVersion = line[2];
-        
-        
-        /*
-            Then we loop throught the header fields and store the appropriate value to the variables
-        */
-        for (int i=1;i<request.size();i++) {
-            String[] fields = request.get(i).split(":");
-            
-            if(fields[0].equalsIgnoreCase("connection")){
-                connection = fields[1].contains("keep-alive") ? "keep-alive" : "close";
-            }if(fields[0].equalsIgnoreCase("host")){
-                host = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("date")){
-                date = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("accept")){
-                accept = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("authorization")){
-                authorization = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("cookie")){
-                cookie = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("if-match")){
-               
-            }else if(fields[0].equalsIgnoreCase("if-modified-since")){
-                if(ServerUtils.compareDate( fields[1].trim() , urlFile) < 0)
-                    ifModifiedSince = 1;
-                else 
-                    ifModifiedSince = 0;
-            }else if(fields[0].equalsIgnoreCase("if-none-match")){
-                
-            }else if(fields[0].equalsIgnoreCase("if-range")){
-                if(ServerUtils.compareDate( fields[1].trim() , urlFile) < 0)
-                    ifRange = 1;
-                else 
-                    ifRange = 0;
-            }else if(fields[0].equalsIgnoreCase("if-unmodified-since")){
-                if(ServerUtils.compareDate( fields[1].trim() , urlFile) >0)
-                    ifUnModifiedSince = 1;
-                else 
-                    ifUnModifiedSince = 0;
-            }else if(fields[0].equalsIgnoreCase("range")){
-                range = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("user-agent")){
-                userAgent = fields[1].trim();
-            }else if(fields[0].equalsIgnoreCase("transfer-encoding")){
-                transferEncoding = fields[1].trim();
-            }
-            
-        }
-               
-    }
     
-    public void getResponse() throws IOException{
+    public void runMethod() throws IOException{
         /*
             If protocol is not HTTP/1.1 or HTTP/1.0 is is not suported
         */
-        if(! (protocolVersion.equals("HTTP/1.1") || protocolVersion.equals("HTTP/1.0") )){
-            outStream.writeBytes(_505);
+        if(! (request.protocolVersion.equals("HTTP/1.1") || request.protocolVersion.equals("HTTP/1.0") )){
+            response = code505();
             return;
         }
         
         /*
             The request MUST contain a host header field
         */
-        if(host==null){
-            outStream.writeBytes(_400);
+        if(request.getHeader("host")==null){
+            response = code400();
             return;
         }
         
         /*
             If true the project is modified
         */
-        if (ifUnModifiedSince == 0 && urlFile.exists()){ 
-            outStream.writeBytes(_412);
+        if (request.getHeader("if-un-modified-since")!=null && request.urlFile.exists() && !request.getHeader("if-un-modified-since").getCondition()){ 
+            response = code412();
             return;
         }
-        
+
         /*
             If true the project is not modified , so 304 status code is send back
         */
-        if( ifModifiedSince == 0 && urlFile.exists()){
-            outStream.writeBytes(_304);
+        if(request.getHeader("if-modified-since")!=null && request.urlFile.exists() && !request.getHeader("if-modified-since").getCondition()){
+            response = code304();
             return;
         }
         
@@ -178,94 +78,88 @@ public class HTTPRequestHandler {
                 if the  requested Method is not valid
                 a   400    response   is  sent   back
                                                             */  
-        if(method.equalsIgnoreCase("GET")){
+        if(request.method.equalsIgnoreCase("GET")){
             if(Config.GET)
                 get();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("POST")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("POST")){
             if(Config.POST)
                 post();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("HEAD")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("HEAD")){
             if(Config.HEAD)
                 head();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("PUT")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("PUT")){
             if(Config.PUT)
                 put();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("DELETE")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("DELETE")){
             if(Config.DELETE)
                 delete();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("CONNECT")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("CONNECT")){
             if(Config.CONNECT)
                 connect();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("TRACE")){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("TRACE")){
             if(Config.TRACE)
                 trace();
             else
-                outStream.writeBytes(_405);
-        }else if(method.equalsIgnoreCase("OPTIONS") && Config.OPTIONS){
+                response = code405();
+        }else if(request.method.equalsIgnoreCase("OPTIONS") && Config.OPTIONS){
             if(Config.OPTIONS)
                 options();
             else
-                outStream.writeBytes(_405);
+                response = code405();
         }else{
-            outStream.writeBytes(_400);
+            response = code400();
         };
         
-    }
+    } 
     
     private void get() throws IOException{
-        String response = "";
-        File f = new File("www"+url);
-        if(f.exists()){
-            if(f.isDirectory()){
-                for (String defaultPage : HTTPServer.defaultPages) {
-                    if (url.endsWith("/")) {
-                        f = new File("www"+url + defaultPage);
-                    } else {
-                        f = new File("www"+url+"/" + defaultPage);
+        boolean exists = false;
+       
+        if(request.urlFile.exists()){
+            if(request.urlFile.isDirectory()){
+                String tempPath = request.urlFile.getPath();
+                for (String defaultPage : HTTPServer.defaultPages) {    
+                    if (tempPath.endsWith("/")) {
+                        request.urlFile = new File(tempPath+defaultPage);
+                    }else {
+                        request.urlFile = new File(tempPath+"/"+defaultPage);
                     }
-                    if(f.exists()){
-                        byte[] entity = ServerUtils.getBinaryFile(f);
-                        response+=HTTP_VERSION+" 200 OK\r\n";
-                        response+="Date: "+ServerUtils.getServerTime()+"\r\n";
-                        response+="Connection: "+connection+"\r\n";
-                        response+="Server: "+SERVER_NAME+"\r\n" ;
-                        response+="Content-Length: "+entity.length+"\r\n";
-                        response+="Last-Modified:"+f.lastModified()+"\r\n";
-                        response+="\r\n";
-                        outStream.writeBytes(response);
-                        outStream.write(entity);
-                        return;
+                    if(request.urlFile.exists()){
+                        exists = true;
+                        break;
                     }
-                    
                 }
-            }else{
-                byte[] entity = ServerUtils.getBinaryFile(f);
-                response+=HTTP_VERSION+" 200 OK\r\n";
-                response+="Connection: "+connection+"\r\n";
-                response+="Server: "+SERVER_NAME+"\r\n" ;
-                response+="Content-Length: "+entity.length+"\r\n";
-                response+="Last-Modified:"+f.lastModified()+"\r\n";
-                response+="\r\n";
-                outStream.writeBytes(response);
-                outStream.write(entity);
-                
-                return;
+            }else{     
+                exists = true;
             }
         }
-        outStream.writeBytes(_404);
+        
+        if(exists){
+            byte[] body = ServerUtils.getBinaryFile(request.urlFile);
+            
+            response.setStatusCode(HTTP_VERSION+" 200 OK");
+            response.addHeader("connection", request.getHeaderField("connection"));
+            response.addHeader("date", ServerUtils.getServerTime());
+            response.addHeader("server",SERVER_NAME);
+            response.addHeader("last-modified", String.valueOf(request.urlFile.lastModified()));
+            response.addHeader("content-length", String.valueOf(body.length));
+            response.addBody(body);
+        }else
+            response = code404();
     }
+    
     
     private void post(){
         
@@ -276,84 +170,87 @@ public class HTTPRequestHandler {
     }
     
     private void put() throws IOException{
-        File f = new File("www"+url);
-        
-        
-        BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-        
-        
-        for(int i=0;i<body.size();i++){
-            System.out.println(body.get(i));
-            writer.write(body.get(i));
-            writer.newLine();
-        }
+        System.out.println("here");
+        response = code204();
+        FileOutputStream writer = new FileOutputStream(request.urlFile);
+        writer.write(request.body);
         writer.close();
-        outStream.writeChars(_204);
+        System.out.println("here");
     }
     
     private void delete() throws IOException{
-        File f = new File("www"+url);
-        if(f.exists() && f.isDirectory()){
-            for (String defaultPage : HTTPServer.defaultPages) {
-                if (url.endsWith("/")) {
-                    f = new File("www"+url + defaultPage);
-                }else {
-                    f = new File("www"+url+"/" + defaultPage);
-                }
-                
-                if(f.exists()){
-                    if(f.delete()){
-                    outStream.writeBytes(_204);
-                    return;
-                    }else{
-                        System.out.println("not deleted");
+        boolean exists = false;
+       
+        if(request.urlFile.exists()){
+            if(request.urlFile.isDirectory()){
+                String tempPath = request.urlFile.getPath();
+                for (String defaultPage : HTTPServer.defaultPages) {    
+                    if (tempPath.endsWith("/")) {
+                        request.urlFile = new File(tempPath+defaultPage);
+                    }else {
+                        request.urlFile = new File(tempPath+"/"+defaultPage);
+                    }
+                    if(request.urlFile.exists()){
+                        exists = true;
+                        break;
                     }
                 }
-                
+            }else{     
+                exists = true;
             }
-        }else if(f.exists()){
-            if(f.delete()){
-                outStream.writeBytes(_204);
-                return;
-            }else{
-                System.out.println("not deleted");
-                    }
-            return;
         }
         
-        outStream.writeBytes(_404);
+        if(exists){
+            if(request.urlFile.delete()){
+                response = code204();
+            }else{
+                System.out.println("Error while deleting it");
+            }
+        }else
+            response = code404();
     }
     
     private void connect() throws IOException{
-        outStream.writeBytes(HTTP_VERSION+" 200 Connection established\r\n" +
-                             "Date: "+ServerUtils.getServerTime()+"\r\n"+
-                             "Server: "+SERVER_NAME+"\r\n");
+        response.setStatusCode(HTTP_VERSION+" 200 Connection established");
+        response.addHeader("date", ServerUtils.getServerTime());
+        response.addHeader("server", SERVER_NAME);
     }
     
-    private void trace()throws IOException{
-        String body ="";
-        for(int i=0;i<request.size();i++)
-            body+=request.get(i)+"\r\n";
+    private void trace()throws IOException{        
+        response.setStatusCode(HTTP_VERSION+" 200 OK");
+        response.addHeader("date", ServerUtils.getServerTime());
+        response.addHeader("server", SERVER_NAME);
+        response.addHeader("connection",request.getHeaderField("connection"));
+        response.addHeader("content-type","message/http");
+        response.addHeader("content-length" ,String.valueOf(request.getRequestString().getBytes().length));
+        response.addBody(request.getRequestString().getBytes());
+    }
+    
+    private void options() throws IOException{   
+        String allow= "";
         
-        String response = "";
-        response+=  HTTP_VERSION+" 200 OK\r\n" +
-                    "Date: "+ServerUtils.getServerTime()+"\r\n"+
-                    "Server: "+SERVER_NAME+"\r\n"  +
-                    "Connection: "+connection+"\r\n" +
-                    "Content-Type: message/http\r\n" +
-                    "Content-Length: "+body.getBytes().length+"\r\n"+
-                    "\r\n"+
-                    body;
-        outStream.writeBytes(response);
-    }
-    
-    private void options() throws IOException{
-        outStream.writeBytes(   HTTP_VERSION+" 200 OK\r\n" +
-                                "Date: "+ServerUtils.getServerTime()+"\r\n" +
-                                "Server: "+SERVER_NAME+"\r\n" +
-                                "Allow: GET,HEAD,POST,DELETE,CONNECT,OPTIONS,TRACE\r\n" +
-                                "Content-Type: httpd/unix-directory\r\n");
-    }
-    
-    
+        if(Config.GET)
+            allow+="GET";
+        else if(Config.POST)
+            allow+=",POST";
+        else if(Config.HEAD)
+            allow+=",HEAD";
+        else if(Config.TRACE)
+            allow+=",TRACE";
+        else if(Config.OPTIONS)
+            allow+=",OPTIONS";
+        else if(Config.DELETE)
+            allow+=",DELETE";
+        else if(Config.PUT)
+            allow+=",PUT";
+        else if(Config.CONNECT)
+            allow+=",CONNECT";
+            
+        
+        response.setStatusCode(HTTP_VERSION+" 200 OK");
+        response.addHeader("date", ServerUtils.getServerTime());
+        response.addHeader("server",SERVER_NAME);
+        response.addHeader("allow", allow);
+        response.addHeader("Content-Type","httpd/unix-directory");
+    }    
 }

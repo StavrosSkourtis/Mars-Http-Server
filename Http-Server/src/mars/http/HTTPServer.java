@@ -21,8 +21,8 @@ public class HTTPServer extends Thread{
     
     public HTTPServer(int portNumber) throws IOException{
         // create the server's socket
-        HTTPStatus.init();
         serverSocket = new ServerSocket(portNumber);
+        serverSocket.setSoTimeout(15000);
     }
         
     @Override
