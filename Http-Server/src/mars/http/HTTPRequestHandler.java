@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import static mars.http.HTTPStatus.*;
 import mars.utils.Config;
+import mars.utils.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,15 +32,17 @@ public class HTTPRequestHandler {
         response = new HTTPResponse();
     }
     
-    public boolean process() throws IOException{
+    public boolean process(String ip,int port) throws IOException{
         runMethod();
         response.send(outStream);
+        // adding records to the log file (log.txt)
+        Logger.addRecord(ip, port, request.method+" "+request.url , response.getStatusCode());
         
         return request.getHeaderField("connection")!=null && !request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
     }
     
     
-    public void runMethod() throws IOException{
+    private void runMethod() throws IOException{
         /*
             If protocol is not HTTP/1.1 or HTTP/1.0 is is not suported
         */
@@ -130,7 +133,7 @@ public class HTTPRequestHandler {
         if(request.urlFile.exists()){
             if(request.urlFile.isDirectory()){
                 String tempPath = request.urlFile.getPath();
-                for (String defaultPage : HTTPServer.defaultPages) {    
+                for (String defaultPage : Config.DEFAULT_PAGES) {    
                     if (tempPath.endsWith("/")) {
                         request.urlFile = new File(tempPath+defaultPage);
                     }else {
@@ -184,7 +187,7 @@ public class HTTPRequestHandler {
         if(request.urlFile.exists()){
             if(request.urlFile.isDirectory()){
                 String tempPath = request.urlFile.getPath();
-                for (String defaultPage : HTTPServer.defaultPages) {    
+                for (String defaultPage : Config.DEFAULT_PAGES) {    
                     if (tempPath.endsWith("/")) {
                         request.urlFile = new File(tempPath+defaultPage);
                     }else {

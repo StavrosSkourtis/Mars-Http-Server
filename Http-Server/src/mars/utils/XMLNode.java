@@ -116,6 +116,9 @@ public class XMLNode {
         return matchingNodes;
     }
     
+    public void removeAllChildNodes(){
+        children = new ArrayList<XMLNode>();
+    }
     
     public void remove(int index){
         children.remove(index);

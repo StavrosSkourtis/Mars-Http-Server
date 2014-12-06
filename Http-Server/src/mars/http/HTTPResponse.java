@@ -25,6 +25,9 @@ public class HTTPResponse {
     public void setStatusCode(String statusCode){
         this.statusCode = statusCode;
     }
+    public String getStatusCode(){
+        return statusCode;
+    }
     
     public void addHeader(String name,String value){
         headers.add(name+": "+value);

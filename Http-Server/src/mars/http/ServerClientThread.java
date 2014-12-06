@@ -16,9 +16,11 @@ import mars.utils.Logger;
 
 public class ServerClientThread extends Thread{
     
-    private final Socket client;    
+    private final Socket client; 
+    private String root;
     
-    public ServerClientThread(Socket client){
+    public ServerClientThread(Socket client,String root){
+        this.root = root;
         this.client = client; 
     }
     
@@ -37,17 +39,15 @@ public class ServerClientThread extends Thread{
                 int length;
                 
                 //Create a new HTTPRequest (an object that represents it , not an actual http request) and pass it the socket input stream;
-                HTTPRequest request = new HTTPRequest("www");
+                HTTPRequest request = new HTTPRequest(root);
                 request.create(in);
+                              
                 
-               
-                // adding records to the log file (log.txt)
-                Logger.addRecord("Connected to "+client.getInetAddress()+" port:"+client.getPort()+" Requested : "+request.method+" "+request.url);
 
                 // it parses the request and send back the response
                 HTTPRequestHandler requestProcess = new HTTPRequestHandler(request,out);
                 // returns true if keep alive , false if close or not exists
-                connection = requestProcess.process();
+                connection = requestProcess.process(client.getInetAddress().toString(),client.getPort());
                 
             }while(connection);
             

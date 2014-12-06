@@ -15,11 +15,16 @@ import java.util.ArrayList;
 public class HTTPServer extends Thread{
     
     public static ArrayList<String> requests;
-    public static String[] defaultPages;
-   
-    private final ServerSocket serverSocket;
     
-    public HTTPServer(int portNumber) throws IOException{
+    private final ServerSocket serverSocket;
+    private boolean run;
+    private String root;
+    private boolean ssl;
+    
+    public HTTPServer(String root,int portNumber,boolean ssl) throws IOException{
+        this.root = root;
+        this.ssl = ssl;
+        run = true;
         // create the server's socket
         serverSocket = new ServerSocket(portNumber);
         serverSocket.setSoTimeout(15000);
@@ -27,16 +32,25 @@ public class HTTPServer extends Thread{
         
     @Override
     public void run(){
-        while(true){
+        while(run){
             try{
                 // Listen for new requests and accept them
                 Socket client = serverSocket.accept();
                 
                 // Start a new thread for every request and go back go listening
-                new ServerClientThread(client).start();
+                new ServerClientThread(client,root).start();
             }catch(IOException e){
                 
             }
         }  
     }
+    
+    public void stopServer(){
+        run = false;
+    }
+    public void resumeServer(){
+        run = true;
+        this.start();
+    }
+
 }

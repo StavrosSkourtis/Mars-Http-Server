@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class Logger {
     public static final String LOG_FILE = "log.txt";
+    public static ArrayList<Connection> connections = new ArrayList<Connection>();
     static BufferedWriter writer;
     
     public static void init(){
@@ -48,9 +49,10 @@ public class Logger {
         }catch(IOException e){}
     }
     
-    public static void addRecord(String record){
+    public static void addRecord(String ip,int port,String requestLine,String responseCode){
+        connections.add(new Connection(ip, port, requestLine, responseCode));
         try{
-            writer.write(record);
+            writer.write("Connected to"+ip+":"+port+" requested:"+requestLine+" responded with "+responseCode);
             writer.newLine();
         }catch(IOException e){}
     }

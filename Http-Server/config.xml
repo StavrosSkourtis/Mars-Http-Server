@@ -1,20 +1,27 @@
-<httpmethods>
-    <method name="get" allow="true" />
-    <method name="post" allow="true" />
-    <method name="trace" allow="true" />
-    <method name="head" allow="true" />
-    <method name="put" allow="true" />
-    <method name="delete" allow="true" />
-    <method name="connect" allow="true" />
-    <method name="options" allow="true" />
+<httpmethods >                                
+<method name="get" allow="true" ></method>
+<method name="post" allow="true" ></method>
+<method name="trace" allow="true" ></method>
+<method name="head" allow="true" ></method>
+<method name="put" allow="true" ></method>
+<method name="delete" allow="true" ></method>
+<method name="connect" allow="true" ></method>
+<method name="options" allow="true" ></method>
 </httpmethods>
-
-
-<defaults>
-    <page value="index.html" weight="1" />
-    <page value="index.htm" weight="2" />
-    <page value="default.html" weight="3" />
-    <page value="default.htm" weight="4" />    
+<defaults >                    
+<page value="index.html" ></page>
+<page value="index.htm" ></page>
+<page value="default.html" ></page>
+<page value="default.htm" ></page>
 </defaults>
-
-<php allow="true" path="" />
+<php allow="false" path="" ></php>
+<blacklist >    
+<ip address="192.168.1.1" ></ip>
+<ip address="192.168.1.1" ></ip>
+<ip address="192.168.1.1" ></ip>
+<ip address="192.168.1.1" ></ip>
+</blacklist>
+<websites >        
+<site path="www" port="81" online="true" ssl="false" ></site>
+<site path="w2" port="82" online="true" ssl="false" ></site>
+</websites>
