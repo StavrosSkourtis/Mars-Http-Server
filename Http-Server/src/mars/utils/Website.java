@@ -13,12 +13,15 @@ import mars.http.HTTPServer;
  * @author Phenom
  */
 public class Website {
-    
+    public static int ID=0;
+    private int id;
     private int port;
     private String path;
     private boolean ssl;
     private boolean online;
     private HTTPServer server;
+    private boolean running = false;
+    private boolean neverStarted = true;
     
     public Website(int port, String path, boolean ssl, boolean online) throws IOException{
         this.port = port;
@@ -26,18 +29,36 @@ public class Website {
         this.ssl = ssl;
         this.online = online;
         server = new HTTPServer(path,port,ssl);
+        
+        id = ID++;
     }
     
-    public void start(){
+    public void start() throws IOException{
+        server.start();
+        neverStarted = false;
+    }
+    
+    public void pause() throws IOException{
+        server.dispose();
+    }
+    
+    public void resume() throws IOException{
+        if(neverStarted){
+            start();
+            return;
+        }
+        server.dispose();
+        server = new HTTPServer(path, port, ssl);
         server.start();
     }
     
-    public void stop(){
-        server.stopServer();
+
+    public int getId() {
+        return id;
     }
-    
-    public void resume(){
-        server.resumeServer();
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     

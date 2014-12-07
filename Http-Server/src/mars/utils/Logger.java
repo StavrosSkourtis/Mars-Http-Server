@@ -23,44 +23,59 @@ public class Logger {
     static BufferedWriter writer;
     
     public static void init(){
-        try{
-            File file = new File(LOG_FILE);
-            if(file.exists()){
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                ArrayList<String> lines = new ArrayList<String>();
-                
-                String line;
-                while( (line = reader.readLine()) != null){
-                    lines.add(line);
-                }
-                
-                reader.close();
-                
-                writer = new BufferedWriter(new FileWriter(file));
-                
-                for(String l: lines){
-                    writer.write(l);
-                    writer.newLine();
-                }
-                
-            }else{
-                writer = new BufferedWriter(new FileWriter(file));
-            }
-        }catch(IOException e){}
+        
     }
     
     public static void addRecord(String ip,int port,String requestLine,String responseCode){
         connections.add(new Connection(ip, port, requestLine, responseCode));
         try{
+            BufferedReader reader = new BufferedReader(new FileReader("log.txt"));
+            ArrayList<String> lines = new ArrayList<String>();
+                
+            String line;
+            while( (line = reader.readLine()) != null){
+                    lines.add(line);
+            }
+                
+            reader.close();
+                
+            BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"));
+                for(String l: lines){
+                    writer.write(l);
+                    writer.newLine();
+                }
             writer.write("Connected to"+ip+":"+port+" requested:"+requestLine+" responded with "+responseCode);
             writer.newLine();
+            writer.close();
+        }catch(IOException e){}
+    }
+    
+    public static void addRecord(String text){
+        
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("log.txt"));
+            ArrayList<String> lines = new ArrayList<String>();
+                
+            String line;
+            while( (line = reader.readLine()) != null){
+                    lines.add(line);
+            }
+                
+            reader.close();
+                
+            BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"));
+                for(String l: lines){
+                    writer.write(l);
+                    writer.newLine();
+                }
+            writer.write(text);
+            writer.newLine();
+            writer.close();
         }catch(IOException e){}
     }
     
     public static void dispose(){
-        try{
-            writer.close();
-        }catch(IOException e){}
+        
     }
    
     

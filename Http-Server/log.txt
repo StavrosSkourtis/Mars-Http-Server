@@ -1,0 +1,35 @@
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 10:47:31 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:5783 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5785 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5789 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5794 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5797 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5799 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5802 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5803 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5806 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5807 requested:GET / responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 10:48:17 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:5815 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5819 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:5820 requested:GET / responded with HTTP/1.1 304 Not Modified

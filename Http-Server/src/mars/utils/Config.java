@@ -37,8 +37,10 @@ public class Config {
         Loads settings from config.xml file
     */
     public static void init() throws IOException{
-        config = new XMLFile();
-        config.read("config.xml");
+        if(config==null){
+            config = new XMLFile();
+            config.read("config.xml");
+        }
         
         
         /*
@@ -96,6 +98,11 @@ public class Config {
         /*
             Load website settings from config
         */
+        if(WEBSITES!=null){
+            for(Website site: WEBSITES)
+                site.pause();
+        }
+        
         WEBSITES = new ArrayList<Website>();
         ArrayList<XMLNode> siteNodes = config.getChildrenByName("websites").get(0).getChildrenByName("site");
         
@@ -191,6 +198,12 @@ public class Config {
             write changes to file
         */
         config.write("config.xml");
+        
+    }
+    
+    
+    public void reloadSites(){
+        
         
     }
 }

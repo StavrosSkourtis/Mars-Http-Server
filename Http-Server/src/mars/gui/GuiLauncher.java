@@ -6,6 +6,7 @@
 package mars.gui;
 
 import java.awt.AWTException;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -15,6 +16,7 @@ import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -54,10 +56,8 @@ public class GuiLauncher {
             Logger.init();
             
             //Create the Menu Items
-            MenuItem restart =    new MenuItem("       Restart");
-            MenuItem pauseStart = new MenuItem("       Pause");
             MenuItem log =        new MenuItem("       Log");
-            MenuItem options =    new MenuItem("       Options");
+            MenuItem options =    new MenuItem("       Control Panel");
             MenuItem about  =     new MenuItem("       About");
             MenuItem exit =       new MenuItem("       Exit");
             
@@ -81,10 +81,15 @@ public class GuiLauncher {
                 System.exit(0);
             });
             
+            log.addActionListener((ActionEvent e) -> {
+                try{
+                    Desktop.getDesktop().edit(new File("log.txt"));
+                }catch(IOException ee){
+                    
+                }
+            });
+            
             // add menu items to the menu
-            popup.add(pauseStart);
-            popup.add(restart);
-            popup.addSeparator();
             popup.add(log);
             popup.add(options);
             popup.addSeparator();

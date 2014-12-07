@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileFilter;
+import mars.http.HTTPStatus;
 import mars.http.ServerUtils;
 import mars.utils.Config;
 import mars.utils.Logger;
@@ -96,9 +97,11 @@ public class ServerOptions extends javax.swing.JFrame {
         */
         
         for(Website site: Config.WEBSITES){
-            websiteTabPane.addTab(site.getPath(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline()));
+            websiteTabPane.addTab(String.valueOf(site.getId())+":"+site.getPath()+"/"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
         }
         
+        
+        versionLabel.setText(HTTPStatus.SERVER_NAME);
     }
     
     
@@ -132,7 +135,7 @@ public class ServerOptions extends javax.swing.JFrame {
         removeDefaultFileNameButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         saveDefaultNamesButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -140,14 +143,12 @@ public class ServerOptions extends javax.swing.JFrame {
         phpBrowseButton = new javax.swing.JButton();
         phpEnable = new javax.swing.JCheckBox();
         savePHPSettings = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         websiteTabPane = new javax.swing.JTabbedPane();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        saveSites = new javax.swing.JButton();
+        addNewSiteButton = new javax.swing.JButton();
+        removeSiteButton = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -176,7 +177,7 @@ public class ServerOptions extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        versionLabel = new javax.swing.JLabel();
 
         setTitle("HTTP Server Configuration");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -359,7 +360,12 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton4.setText("Close");
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -424,10 +430,6 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton6.setText("Reload Settings");
-
-        jButton7.setText("Restore Defaults");
-
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -435,16 +437,26 @@ public class ServerOptions extends javax.swing.JFrame {
 
         websiteTabPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        jButton8.setText("Save");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        saveSites.setText("Save");
+        saveSites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                saveSitesActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Add new site");
+        addNewSiteButton.setText("Add new site");
+        addNewSiteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewSiteButtonActionPerformed(evt);
+            }
+        });
 
-        jButton10.setText("Remove site");
+        removeSiteButton.setText("Remove site");
+        removeSiteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSiteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -461,11 +473,11 @@ public class ServerOptions extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(removeSiteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton9)
+                                .addComponent(addNewSiteButton)
                                 .addGap(15, 15, 15)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(saveSites, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -478,13 +490,13 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveSites, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(removeSiteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addNewSiteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -604,11 +616,7 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -619,7 +627,7 @@ public class ServerOptions extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 260, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -632,10 +640,7 @@ public class ServerOptions extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -752,8 +757,8 @@ public class ServerOptions extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Mars Control Panel");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("version 1.0.0");
+        versionLabel.setForeground(new java.awt.Color(255, 255, 255));
+        versionLabel.setText("version 1.0.0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -763,7 +768,7 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(versionLabel)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -774,7 +779,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel2)))
+                        .addComponent(versionLabel)))
                 .addContainerGap())
         );
 
@@ -812,9 +817,50 @@ public class ServerOptions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_defaultFileTextFieldActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void saveSitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSitesActionPerformed
+        try{
+            boolean flag = false;
+            for(int i=0; i< websiteTabPane.getTabCount();i++){
+                WebsitePanel panel = (WebsitePanel)(websiteTabPane.getComponentAt(i));
+                Website site = null;
+                for(int j=0;j<Config.WEBSITES.size();j++){
+                    site = Config.WEBSITES.get(j);
+                    if(site.getId()==panel.getId()){
+                        flag = true;
+                        break;
+                    }
+                }
+                
+                
+                /*
+                    if flag = true ,website already exists and is contained in the site object
+                */
+                if(flag){
+                    site.setPort(panel.getPort());
+                    site.setOnline(panel.isOnline());
+                    site.setPath(panel.getPath());
+                    site.setSsl(panel.isSSL());
+                    try{
+                        if(site.isOnline())
+                            site.resume();
+                        else
+                            site.pause();
+                    }catch(Exception e){}
+                }else{
+                    Website temp = new Website( panel.getPort(),panel.getPath(), panel.isSSL(), panel.isOnline());
+                    websiteTabPane.setTitleAt(i, temp.getId()+":"+temp.getPath()+"/"+temp.getPort());
+                    if(temp.isOnline())
+                        temp.start();
+                    Config.WEBSITES.add(temp); 
+                }
+                flag = false;
+            }
+            Config.saveChanges();
+            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveSitesActionPerformed
 
     private void removeDefaultFileNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDefaultFileNameButtonActionPerformed
         pageListModel.remove(defaultPageList.getSelectedIndex());
@@ -906,13 +952,99 @@ public class ServerOptions extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_phpBrowseButtonActionPerformed
+
+    private void addNewSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSiteButtonActionPerformed
+        websiteTabPane.addTab("-1:(new site)", new WebsitePanel("default", 60000, false, false,Website.ID++));
+    }//GEN-LAST:event_addNewSiteButtonActionPerformed
+
+    private void removeSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSiteButtonActionPerformed
+        
+        int choise = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this website?", "Remove site.", JOptionPane.YES_NO_OPTION , JOptionPane.QUESTION_MESSAGE);
+        
+        if(choise == JOptionPane.YES_OPTION){
+            int pos = -1;
+            for(int i=0;i<Config.WEBSITES.size();i++){
+                if(websiteTabPane.getTitleAt(websiteTabPane.getSelectedIndex()).split(":")[0].equals(String.valueOf(Config.WEBSITES.get(i).getId()))){
+                    pos = i;
+                    break;
+                }
+            }
+            
+            if(pos!=-1)
+                Config.WEBSITES.remove(pos);
+            websiteTabPane.remove(websiteTabPane.getSelectedIndex());
+            
+            try{
+                Config.saveChanges();
+                JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }catch(IOException e){
+                JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_removeSiteButtonActionPerformed
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_closeButtonActionPerformed
     
+    
+    
+    public void restoreDefaults(){
+        /*
+            Load which methods are allow from config
+        */
+        getCheckBox.setSelected(Config.GET);
+        postCheckBox.setSelected(Config.POST);
+        headCheckBox.setSelected(Config.HEAD);
+        traceCheckBox.setSelected(Config.TRACE);
+        optionsCheckBox.setSelected(Config.OPTIONS);
+        deleteCheckBox.setSelected(Config.DELETE);
+        putCheckBox.setSelected(Config.PUT);
+        connectCheckBox.setSelected(Config.CONNECT);
+        
+        System.out.println("Here "+Config.GET);
+        /*
+            Load php from config
+        */
+        phpEnable.setSelected(Config.PHP_ENABLED);
+        phpPathTextfield.setText(Config.PHP_PATH);
+        
+        
+        /*
+            Load default pages from config
+        */
+        pageListModel.removeAllElements();
+        for(String page : Config.DEFAULT_PAGES){
+            pageListModel.addElement(page);
+        }
+        
+        
+        /*
+            Load black list from config
+        */
+        blackListModel.removeAllElements();
+        for(String page : Config.BLACK_LIST){
+            blackListModel.addElement(page);
+        }
+        
+        /*
+            Load websites from config
+        */
+        websiteTabPane.removeAll();
+        for(Website site: Config.WEBSITES){
+            websiteTabPane.addTab(String.valueOf(site.getId())+":"+site.getPath()+"/"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
+        }
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBlackListItemButton;
     private javax.swing.JButton addDefaultFileNameButton;
+    private javax.swing.JButton addNewSiteButton;
     private javax.swing.JList blackListList;
+    private javax.swing.JButton closeButton;
     private javax.swing.JCheckBox connectCheckBox;
     private javax.swing.JTextField defaultFileTextField;
     private javax.swing.JList defaultPageList;
@@ -924,12 +1056,6 @@ public class ServerOptions extends javax.swing.JFrame {
     private javax.swing.JTextField ipPart2;
     private javax.swing.JTextField ipPart3;
     private javax.swing.JTextField ipPart4;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -937,7 +1063,6 @@ public class ServerOptions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -968,13 +1093,16 @@ public class ServerOptions extends javax.swing.JFrame {
     private javax.swing.JCheckBox putCheckBox;
     private javax.swing.JButton removeBlackListItemButton;
     private javax.swing.JButton removeDefaultFileNameButton;
+    private javax.swing.JButton removeSiteButton;
     private javax.swing.JLabel requestField;
     private javax.swing.JLabel responseField;
     private javax.swing.JButton saveBlackListButton;
     private javax.swing.JButton saveDefaultNamesButton;
     private javax.swing.JButton saveMethodsButton;
     private javax.swing.JButton savePHPSettings;
+    private javax.swing.JButton saveSites;
     private javax.swing.JCheckBox traceCheckBox;
+    private javax.swing.JLabel versionLabel;
     private javax.swing.JTabbedPane websiteTabPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ public class HTTPServer extends Thread{
     
     public static ArrayList<String> requests;
     
-    private final ServerSocket serverSocket;
+    private ServerSocket serverSocket;
     private boolean run;
     private String root;
     private boolean ssl;
@@ -33,24 +33,23 @@ public class HTTPServer extends Thread{
     @Override
     public void run(){
         while(run){
-            try{
-                // Listen for new requests and accept them
-                Socket client = serverSocket.accept();
-                
-                // Start a new thread for every request and go back go listening
-                new ServerClientThread(client,root).start();
-            }catch(IOException e){
-                
-            }
+            
+                try{
+                    // Listen for new requests and accept them
+                    Socket client = serverSocket.accept();
+
+                    // Start a new thread for every request and go back go listening
+                    new ServerClientThread(client,root).start();
+                }catch(IOException e){
+
+                }
+            
         }  
     }
     
-    public void stopServer(){
+    public void dispose() throws IOException{
+        serverSocket.close();
         run = false;
     }
-    public void resumeServer(){
-        run = true;
-        this.start();
-    }
-
+      
 }

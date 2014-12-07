@@ -13,15 +13,11 @@
 <page value="index.htm" ></page>
 <page value="default.html" ></page>
 <page value="default.htm" ></page>
+<page value="hello.html" ></page>
 </defaults>
 <php allow="false" path="" ></php>
-<blacklist >    
-<ip address="192.168.1.1" ></ip>
-<ip address="192.168.1.1" ></ip>
-<ip address="192.168.1.1" ></ip>
-<ip address="192.168.1.1" ></ip>
-</blacklist>
+<blacklist >    </blacklist>
 <websites >        
 <site path="www" port="81" online="true" ssl="false" ></site>
-<site path="w2" port="82" online="true" ssl="false" ></site>
+<site path="w2" port="8080" online="true" ssl="false" ></site>
 </websites>

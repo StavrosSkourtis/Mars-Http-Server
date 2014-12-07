@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import mars.cli.CommandLineInterface;
 import mars.gui.GuiLauncher;
+import mars.http.HTTPStatus;
+import mars.http.ServerUtils;
 import mars.utils.Config;
 import mars.utils.Logger;
 import mars.utils.Website;
@@ -24,10 +26,6 @@ import mars.utils.XMLNode;
 public class Launcher {
     
     public static void main(String args[]) throws IOException{
-        /*
-            Initialise config file ....
-        */
-        Config.init();
         
         /*
             Initialise the Logger .... 
@@ -35,12 +33,22 @@ public class Launcher {
         Logger.init();
         
         
+        Logger.addRecord("\r\n"+HTTPStatus.SERVER_NAME+"\r\n"+ServerUtils.getServerTime()+"\r\n-------------------------------------------------");
+        Logger.addRecord("Loading config...");
+        /*
+            Initialise config file ....
+        */
+        Config.init();
+        Logger.addRecord("Config loaded");
+        
         
         /*  Old code for single server capabilities
         HTTPServer server = new HTTPServer("www",81,false);
         server.start();
         */
         
+        
+        Logger.addRecord("Starting sites..");
         /*
             Website initialization
         */
@@ -48,17 +56,20 @@ public class Launcher {
             if(site.isOnline())
                 site.start();
         }
-       
-        
+        Logger.addRecord("Sites started");       
         /*
             Check if graphical enviroment exists
             if true (a linux server without gui) then we start the command line interface
             if false we start the graphical user interface
         */
+        Logger.addRecord("Checking graphical enviroment...");
         if (GraphicsEnvironment.isHeadless()) {
+            Logger.addRecord("Command line started");
             CommandLineInterface.run();
         } else {
+            Logger.addRecord("starting gui..");
             new GuiLauncher();
+            Logger.addRecord("gui ready");
         }
         
     }

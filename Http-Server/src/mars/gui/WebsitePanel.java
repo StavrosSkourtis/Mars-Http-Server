@@ -11,16 +11,19 @@ package mars.gui;
  */
 public class WebsitePanel extends javax.swing.JPanel {
 
+    private int id;
+    
     /**
      * Creates new form WebsitePanel
      */
-    public WebsitePanel(String path, int port,boolean ssl,boolean online) {
+    public WebsitePanel(String path, int port,boolean ssl,boolean online,int id) {
         initComponents();
         
         pathTextField.setText(path);
         portTextfield.setText(String.valueOf(port));
         sslCheckBox.setSelected(ssl);
         onlineCheckBox.setSelected(online);
+        this.id = id;
     }
 
     /**
@@ -103,6 +106,32 @@ public class WebsitePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_browseButtonActionPerformed
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
+    
+    public String getPath(){
+        return pathTextField.getText();
+    }
+    
+    public int getPort(){
+        return Integer.parseInt(portTextfield.getText());
+    }
+    
+    public boolean isSSL(){
+        return sslCheckBox.isSelected();
+    }
+    
+    public boolean isOnline(){
+        return onlineCheckBox.isSelected();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
