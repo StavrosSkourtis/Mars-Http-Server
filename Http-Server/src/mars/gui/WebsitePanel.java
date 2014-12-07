@@ -5,6 +5,9 @@
  */
 package mars.gui;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Phenom
@@ -103,7 +106,16 @@ public class WebsitePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        // TODO add your handling code here:
+        File dir = new File("./");
+        JFileChooser chooser = new JFileChooser(dir);
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        if(chooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
+            pathTextField.setText(chooser.getSelectedFile().getAbsolutePath());
+        }
+        
+        
+        
     }//GEN-LAST:event_browseButtonActionPerformed
 
     public int getId() {

@@ -1,6 +1,189 @@
+Connected to/0:0:0:0:0:0:0:1:6256 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 10:47:31 GMT
+Sun, 07 Dec 2014 11:06:13 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+Connected to/0:0:0:0:0:0:0:1:6270 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6272 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 11:19:40 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:04:10 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:04:54 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:05:53 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:06:30 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:07:19 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:08:05 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:09:00 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:11:28 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:19:25 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:19:43 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+Connected to/0:0:0:0:0:0:0:1:7145 requested:GET / responded with HTTP/1.1 405 Method Not Allowed
+Connected to/0:0:0:0:0:0:0:1:7146 requested:GET / responded with HTTP/1.1 405 Method Not Allowed
+Connected to/0:0:0:0:0:0:0:1:7154 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:7155 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:7156 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:29:25 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:30:13 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:38:19 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:38:38 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:38:54 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 12:39:06 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:30:56 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -9,19 +192,9 @@ Sites started
 Checking graphical enviroment...
 starting gui..
 gui ready
-Connected to/0:0:0:0:0:0:0:1:5783 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5785 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5789 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5794 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5797 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5799 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5802 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5803 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5806 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5807 requested:GET / responded with HTTP/1.1 304 Not Modified
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 10:48:17 GMT
+Sun, 07 Dec 2014 15:33:15 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -30,6 +203,139 @@ Sites started
 Checking graphical enviroment...
 starting gui..
 gui ready
-Connected to/0:0:0:0:0:0:0:1:5815 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5819 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:5820 requested:GET / responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:35:20 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:36:44 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:36:49 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:39:28 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:39:49 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 15:41:32 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 16:20:42 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+Connected to/0:0:0:0:0:0:0:1:9289 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9290 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9291 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9292 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9345 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9346 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 16:23:27 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 16:26:12 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 16:27:13 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+Connected to/0:0:0:0:0:0:0:1:9461 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9462 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9463 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9464 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9538 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9539 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9540 requested:GET /code26.png responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:9541 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9567 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9568 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9578 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9579 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:9580 requested:GET / responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9581 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9582 requested:GET / responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9583 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9584 requested:GET / responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9585 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9586 requested:GET / responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:9587 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+
+Mars alpha 1.0.0
+Sun, 07 Dec 2014 16:31:37 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+Command line started
+Connected to/0:0:0:0:0:0:0:1:9615 requested:GET /hello.html responded with HTTP/1.1 405 Method Not Allowed
+Connected to/0:0:0:0:0:0:0:1:9616 requested:GET /hello.html responded with HTTP/1.1 405 Method Not Allowed

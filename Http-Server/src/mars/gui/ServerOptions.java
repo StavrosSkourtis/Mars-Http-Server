@@ -97,7 +97,7 @@ public class ServerOptions extends javax.swing.JFrame {
         */
         
         for(Website site: Config.WEBSITES){
-            websiteTabPane.addTab(String.valueOf(site.getId())+":"+site.getPath()+"/"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
+            websiteTabPane.addTab(String.valueOf(site.getId())+"::"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
         }
         
         
@@ -840,6 +840,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     site.setOnline(panel.isOnline());
                     site.setPath(panel.getPath());
                     site.setSsl(panel.isSSL());
+                    websiteTabPane.setTitleAt(i, site.getId()+"::"+site.getPort());
                     try{
                         if(site.isOnline())
                             site.resume();
@@ -848,7 +849,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     }catch(Exception e){}
                 }else{
                     Website temp = new Website( panel.getPort(),panel.getPath(), panel.isSSL(), panel.isOnline());
-                    websiteTabPane.setTitleAt(i, temp.getId()+":"+temp.getPath()+"/"+temp.getPort());
+                    websiteTabPane.setTitleAt(i, temp.getId()+"::"+temp.getPort());
                     if(temp.isOnline())
                         temp.start();
                     Config.WEBSITES.add(temp); 
