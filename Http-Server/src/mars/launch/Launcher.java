@@ -58,13 +58,24 @@ public class Launcher {
         }
         Logger.addRecord("Sites started");       
         
+        
+        boolean commandLine = false;
+        
+        for(int i=0;i<args.length;i++){
+            if(args[i].equals("-cli")){
+                commandLine = true;
+                break;
+            }                
+        }
+        
+        
         /*
             Check if graphical enviroment exists
             if true (a linux server without gui) then we start the command line interface
             if false we start the graphical user interface
         */
         Logger.addRecord("Checking graphical enviroment...");
-        if (true){//GraphicsEnvironment.isHeadless() || (args.length >=2) && args[1].equals("-cli")) {
+        if (GraphicsEnvironment.isHeadless() || commandLine ) {
             Logger.addRecord("Command line started");
             CommandLineInterface.run();
         } else {

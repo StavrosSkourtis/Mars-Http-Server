@@ -17,18 +17,22 @@ public class Website {
     private int id;
     private int port;
     private String path;
+    private String sslFile;
+    private String sslPass;
     private boolean ssl;
     private boolean online;
     private HTTPServer server;
     private boolean running = false;
     private boolean neverStarted = true;
     
-    public Website(int port, String path, boolean ssl, boolean online) throws IOException{
+    public Website(int port, String path, boolean ssl, boolean online,String sslFile,String sslPath) throws IOException{
         this.port = port;
         this.path = path;
         this.ssl = ssl;
         this.online = online;
-        server = new HTTPServer(path,port,ssl);
+        this.sslFile = sslFile;
+        this.sslPass = sslPath;
+        server = new HTTPServer(path,port,ssl,sslFile,sslPath);
         
         id = ID++;
     }
@@ -48,11 +52,28 @@ public class Website {
             return;
         }
         server.dispose();
-        server = new HTTPServer(path, port, ssl);
+        server = new HTTPServer(path, port, ssl,sslFile,sslPass);
         server.start();
+    }
+
+    public String getSslFile() {
+        return sslFile;
+    }
+
+    public void setSslFile(String sslFile) {
+        this.sslFile = sslFile;
+    }
+
+    public String getSslPass() {
+        return sslPass;
+    }
+
+    public void setSslPass(String sslPath) {
+        this.sslPass = sslPath;
     }
     
 
+    
     public int getId() {
         return id;
     }

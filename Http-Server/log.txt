@@ -1,189 +1,28 @@
-Connected to/0:0:0:0:0:0:0:1:6256 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3143 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3143 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3143 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:3143 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3142 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 11:06:13 GMT
+Mon, 08 Dec 2014 09:36:19 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
-Connected to/0:0:0:0:0:0:0:1:6270 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:6272 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:3250 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:3250 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3251 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:3512 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:3513 requested:GET /code26.png responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:3512 requested:GET /style.css responded with HTTP/1.1 200 OK
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 11:19:40 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:04:10 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:04:54 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:05:53 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:06:30 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:07:19 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:08:05 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:09:00 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:11:28 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:19:25 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:19:43 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-Connected to/0:0:0:0:0:0:0:1:7145 requested:GET / responded with HTTP/1.1 405 Method Not Allowed
-Connected to/0:0:0:0:0:0:0:1:7146 requested:GET / responded with HTTP/1.1 405 Method Not Allowed
-Connected to/0:0:0:0:0:0:0:1:7154 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:7155 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:7156 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:29:25 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:30:13 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:38:19 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:38:38 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:38:54 GMT
--------------------------------------------------
-Loading config...
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 12:39:06 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:30:56 GMT
+Mon, 08 Dec 2014 09:53:21 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -194,7 +33,7 @@ starting gui..
 gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:33:15 GMT
+Mon, 08 Dec 2014 09:55:41 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -205,7 +44,17 @@ starting gui..
 gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:35:20 GMT
+Mon, 08 Dec 2014 09:59:35 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:01:54 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:02:43 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -216,42 +65,7 @@ starting gui..
 gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:36:44 GMT
--------------------------------------------------
-Loading config...
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:36:49 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:39:28 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:39:49 GMT
--------------------------------------------------
-Loading config...
-Config loaded
-Starting sites..
-Sites started
-Checking graphical enviroment...
-Command line started
-
-Mars alpha 1.0.0
-Sun, 07 Dec 2014 15:41:32 GMT
+Mon, 08 Dec 2014 10:03:16 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
@@ -262,80 +76,623 @@ starting gui..
 gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 16:20:42 GMT
+Mon, 08 Dec 2014 10:05:13 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
-Connected to/0:0:0:0:0:0:0:1:9289 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9290 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9291 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9292 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9345 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9346 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
-
+starting gui..
+gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 16:23:27 GMT
+Mon, 08 Dec 2014 10:08:32 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
+starting gui..
+gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 16:26:12 GMT
+Mon, 08 Dec 2014 10:09:24 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
+starting gui..
+gui ready
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 16:27:13 GMT
+Mon, 08 Dec 2014 10:09:42 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
-Connected to/0:0:0:0:0:0:0:1:9461 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9462 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9463 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9464 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9538 requested:GET / responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9539 requested:GET /style.css responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9540 requested:GET /code26.png responded with HTTP/1.1 200 OK
-Connected to/0:0:0:0:0:0:0:1:9541 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9567 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9568 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9578 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9579 requested:GET / responded with HTTP/1.1 304 Not Modified
-Connected to/0:0:0:0:0:0:0:1:9580 requested:GET / responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9581 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9582 requested:GET / responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9583 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9584 requested:GET / responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9585 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9586 requested:GET / responded with HTTP/1.1 404 Not Found
-Connected to/0:0:0:0:0:0:0:1:9587 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:4219 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4220 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4219 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4201 requested:GET / responded with HTTP/1.1 304 Not Modified
 
 Mars alpha 1.0.0
-Sun, 07 Dec 2014 16:31:37 GMT
+Mon, 08 Dec 2014 10:15:00 GMT
 -------------------------------------------------
 Loading config...
 Config loaded
 Starting sites..
 Sites started
 Checking graphical enviroment...
-Command line started
-Connected to/0:0:0:0:0:0:0:1:9615 requested:GET /hello.html responded with HTTP/1.1 405 Method Not Allowed
-Connected to/0:0:0:0:0:0:0:1:9616 requested:GET /hello.html responded with HTTP/1.1 405 Method Not Allowed
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:19:14 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:22:30 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 2
+00 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:4744 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:4745 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:25:12 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:30:55 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:31:23 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:31:42 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:34:48 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:35:25 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:35:59 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:36:11 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:38:06 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:38:31 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:38:51 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:42:20 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:42:56 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:43:20 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:43:58 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:44:31 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:45:34 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:50:06 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:54:30 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 10:57:38 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:01:06 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:06:24 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:12:25 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:12:36 GMT
+-------------------------------------------------
+Loading config...
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:13:17 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6423 requested:GET / responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:14:03 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6434 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6443 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /code26.png responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6456 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6455 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6533 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6533 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6533 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:6533 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:6535 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:6535 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:22:58 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:23:41 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 11:24:11 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 14:34:50 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:8098 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8098 requested:GET /style.css responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8098 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8098 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8103 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8103 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8104 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8105 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8103 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8104 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8105 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8103 requested:GET / responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 14:36:11 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8152 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8155 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 14:37:30 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:8187 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8187 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 14:38:17 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+
+Mars alpha 1.0.0
+Mon, 08 Dec 2014 14:38:43 GMT
+-------------------------------------------------
+Loading config...
+Config loaded
+Starting sites..
+Sites started
+Checking graphical enviroment...
+starting gui..
+gui ready
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET /favicon.ico responded with HTTP/1.1 404 Not Found
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8235 requested:GET / responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8271 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET / responded with HTTP/1.1 200 OK
+Connected to/0:0:0:0:0:0:0:1:8268 requested:GET /style.css responded with HTTP/1.1 304 Not Modified
+Connected to/0:0:0:0:0:0:0:1:8271 requested:GET /code26.png responded with HTTP/1.1 304 Not Modified

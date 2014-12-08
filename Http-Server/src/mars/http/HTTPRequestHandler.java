@@ -38,7 +38,7 @@ public class HTTPRequestHandler {
         // adding records to the log file (log.txt)
         Logger.addRecord(ip, port, request.method+" "+request.url , response.getStatusCode());
         
-        return request.getHeaderField("connection")!=null && !request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
+        return request.getHeaderField("connection")!=null && request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
     }
     
     

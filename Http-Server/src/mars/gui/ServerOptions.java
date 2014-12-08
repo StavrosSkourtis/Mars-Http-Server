@@ -97,7 +97,7 @@ public class ServerOptions extends javax.swing.JFrame {
         */
         
         for(Website site: Config.WEBSITES){
-            websiteTabPane.addTab(String.valueOf(site.getId())+"::"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
+            websiteTabPane.addTab(String.valueOf(site.getId())+"::"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId(),site.getSslFile(),site.getSslPass()));
         }
         
         
@@ -242,8 +242,8 @@ public class ServerOptions extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(optionsCheckBox)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(putCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(putCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(deleteCheckBox))
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel5Layout.createSequentialGroup()
@@ -405,7 +405,7 @@ public class ServerOptions extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(phpEnable))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(phpBrowseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                             .addComponent(savePHPSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -647,7 +647,7 @@ public class ServerOptions extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 51, Short.MAX_VALUE)))
+                        .addGap(0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -695,7 +695,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(portField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -705,7 +705,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(25, 25, 25))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -727,7 +727,7 @@ public class ServerOptions extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ipField, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                     .addComponent(requestField)
@@ -769,25 +769,25 @@ public class ServerOptions extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(versionLabel)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(versionLabel)))
+                .addComponent(jLabel1)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(versionLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -795,7 +795,7 @@ public class ServerOptions extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
         );
 
         pack();
@@ -840,6 +840,8 @@ public class ServerOptions extends javax.swing.JFrame {
                     site.setOnline(panel.isOnline());
                     site.setPath(panel.getPath());
                     site.setSsl(panel.isSSL());
+                    site.setSslFile(panel.getSSLFile());
+                    site.setSslPass(panel.getSSLPass());
                     websiteTabPane.setTitleAt(i, site.getId()+"::"+site.getPort());
                     try{
                         if(site.isOnline())
@@ -848,7 +850,7 @@ public class ServerOptions extends javax.swing.JFrame {
                             site.pause();
                     }catch(Exception e){}
                 }else{
-                    Website temp = new Website( panel.getPort(),panel.getPath(), panel.isSSL(), panel.isOnline());
+                    Website temp = new Website( panel.getPort(),panel.getPath(), panel.isSSL(), panel.isOnline(),panel.getSSLFile(),panel.getSSLPass());
                     websiteTabPane.setTitleAt(i, temp.getId()+"::"+temp.getPort());
                     if(temp.isOnline())
                         temp.start();
@@ -955,7 +957,7 @@ public class ServerOptions extends javax.swing.JFrame {
     }//GEN-LAST:event_phpBrowseButtonActionPerformed
 
     private void addNewSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSiteButtonActionPerformed
-        websiteTabPane.addTab("-1:(new site)", new WebsitePanel("default", 60000, false, false,Website.ID++));
+        websiteTabPane.addTab("-1:(new site)", new WebsitePanel("default", 60000, false, false,Website.ID++,"",""));
     }//GEN-LAST:event_addNewSiteButtonActionPerformed
 
     private void removeSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSiteButtonActionPerformed
@@ -989,56 +991,7 @@ public class ServerOptions extends javax.swing.JFrame {
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonActionPerformed
-    
-    
-    
-    public void restoreDefaults(){
-        /*
-            Load which methods are allow from config
-        */
-        getCheckBox.setSelected(Config.GET);
-        postCheckBox.setSelected(Config.POST);
-        headCheckBox.setSelected(Config.HEAD);
-        traceCheckBox.setSelected(Config.TRACE);
-        optionsCheckBox.setSelected(Config.OPTIONS);
-        deleteCheckBox.setSelected(Config.DELETE);
-        putCheckBox.setSelected(Config.PUT);
-        connectCheckBox.setSelected(Config.CONNECT);
-        
-        System.out.println("Here "+Config.GET);
-        /*
-            Load php from config
-        */
-        phpEnable.setSelected(Config.PHP_ENABLED);
-        phpPathTextfield.setText(Config.PHP_PATH);
-        
-        
-        /*
-            Load default pages from config
-        */
-        pageListModel.removeAllElements();
-        for(String page : Config.DEFAULT_PAGES){
-            pageListModel.addElement(page);
-        }
-        
-        
-        /*
-            Load black list from config
-        */
-        blackListModel.removeAllElements();
-        for(String page : Config.BLACK_LIST){
-            blackListModel.addElement(page);
-        }
-        
-        /*
-            Load websites from config
-        */
-        websiteTabPane.removeAll();
-        for(Website site: Config.WEBSITES){
-            websiteTabPane.addTab(String.valueOf(site.getId())+":"+site.getPath()+"/"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId()));
-        }
-    }
-    
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBlackListItemButton;

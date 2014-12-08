@@ -56,7 +56,7 @@ public class Commands {
                 System.out.println("SSL    : "+site.isSsl());
             }
         }else if(args.length==2 && args[1].equals("-new")){
-            String path;
+            String path,sslFile="",sslPass="";
             int port;
             boolean ssl,online;
             
@@ -74,11 +74,18 @@ public class Commands {
             
             System.out.println("Enable ssl? (yes/no) :");
             ssl = CommandLineInterface.readString().equalsIgnoreCase("yes");
+            if(ssl){
+                System.out.println("Enter ssl keystore file: ");
+                sslFile = CommandLineInterface.readString();
+                    
+                System.out.println("Enter ssl pass  : ");
+                sslPass = CommandLineInterface.readString();
+            }
             
             System.out.println("Set online? (yes/no) :");
             online = CommandLineInterface.readString().equalsIgnoreCase("yes");
             
-            Config.WEBSITES.add(new Website(port, path, ssl, online));
+            Config.WEBSITES.add(new Website(port, path, ssl, online,sslFile,sslPass));
             Config.saveChanges();
             
             System.out.println("Site added successfuly!\n");
@@ -110,6 +117,21 @@ public class Commands {
                     if(port!=-1){
                         Config.WEBSITES.get(index).setPort(port);
                     }
+                    
+                    System.out.println("Enter ssl keystore file (leave blank to not modify) : ");
+                    
+                    String sslFile = CommandLineInterface.readString();
+                    
+                    if(!path.equals("")){
+                        Config.WEBSITES.get(index).setSslFile(sslFile);
+                        System.out.println("Enter ssl pass (leave blank to not modify) : ");
+                    
+                        String sslPass = CommandLineInterface.readString();
+
+                        if(!path.equals(""))
+                            Config.WEBSITES.get(index).setSslPass(sslPass);
+                    }
+                    
                     
                     Config.saveChanges();
                     System.out.println("Site changed successfuly\n");

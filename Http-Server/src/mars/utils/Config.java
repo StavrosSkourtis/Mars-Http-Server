@@ -111,8 +111,9 @@ public class Config {
             boolean online = node.getAttribute("online").equals("true");
             boolean ssl = node.getAttribute("ssl").equals("true");
             int port = Integer.parseInt(node.getAttribute("port"));
-            
-            WEBSITES.add(new Website(port, path, ssl, online));
+            String sslFile = node.getAttribute("sslfile");
+            String sslPass = node.getAttribute("sslpass");
+            WEBSITES.add(new Website(port, path, ssl, online,sslFile,sslPass));
         }
     }
     
@@ -189,7 +190,8 @@ public class Config {
             temp.addAttribute("port", String.valueOf(site.getPort()));
             temp.addAttribute("online", site.isOnline()?"true":"false");
             temp.addAttribute("ssl", site.isSsl()?"true":"false");
-            
+            temp.addAttribute("sslfile", site.getSslFile());
+            temp.addAttribute("sslpass", site.getSslPass());
             websites.addChildNode(temp);
         }
         
