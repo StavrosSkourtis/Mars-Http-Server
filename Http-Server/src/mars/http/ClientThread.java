@@ -12,28 +12,38 @@ package mars.http;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import mars.utils.Config;
 import mars.utils.Logger;
 
 public class ClientThread extends Thread{
     
     private String root;
-    private DataInputStream in;
-    private DataOutputStream out;
-    private String ip;
-    private int port;
-    public ClientThread(InputStream in,OutputStream out,String root,String ip,int port){
+    private Socket client;
+    public ClientThread(Socket client,String root){
         this.root = root;
-        this.in = new DataInputStream(in);
-        this.out = new DataOutputStream(out);
-        this.ip = ip;
-        this.port = port;
+        this.client = client;
     }
     
                 
     public void run(){
+        
         try{
+            /*
+                If the clints ip is black listed 
+                we will close the connection
+            */
+            for(String ip : Config.BLACK_LIST){
+                if(client.getInetAddress().getHostAddress().equals(ip)){
+                    client.close();
+                    return;
+                }
+
+            }
+        
+        
             // get socket i/o
-            
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
             boolean connection;
             
             do{
@@ -51,16 +61,16 @@ public class ClientThread extends Thread{
                 // it parses the request and send back the response
                 HTTPRequestHandler requestProcess = new HTTPRequestHandler(request,out);
                 // returns true if keep alive , false if close or not exists
-                connection = requestProcess.process(ip,port);
+                connection = requestProcess.process(client.getInetAddress().getHostAddress(),client.getPort());
                 
             }while(connection);
             
             // close i/o and socket
             in.close();
             out.close();
-                
+            client.close();
         }catch(IOException e){   
-            e.printStackTrace();
+            
         }
     }
     

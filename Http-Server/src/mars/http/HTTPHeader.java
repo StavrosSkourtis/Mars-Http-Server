@@ -6,6 +6,7 @@
 package mars.http;
 
 import java.io.File;
+import mars.utils.Config;
 
 /**
  *
@@ -32,30 +33,50 @@ public class HTTPHeader {
         /*
             We just split the line on the ':'
             and put the parts in the name and value fields
-        */
-        String fields[] = line.split(":");
+        */       
+        name = line.substring(0, line.indexOf(":")).trim();
+        value =  line.substring(line.indexOf(":")+1).trim();
         
-        name = fields[0].trim();
-        value = fields[1].trim();
-        
+        // Check if value contains an etag
+        boolean etag  = value.charAt(0)=='"' && value.charAt(value.length()-1)=='"' ;
         
         
         /*
             If the header is conditional we check the condition and update the confition variable
         */
-        if(name.equalsIgnoreCase("if-match")){
-               
-        }else if(name.equalsIgnoreCase("if-modified-since")){
-            if(ServerUtils.compareDate( value , urlFile) == -1 && urlFile.exists())
-                condition = true;
-        }else if(name.equalsIgnoreCase("if-none-match")){
-                
-        }else if(name.equalsIgnoreCase("if-range")){
-            if(ServerUtils.compareDate( value , urlFile) ==-1 && urlFile.exists())
-                condition = true;
-        }else if(name.equalsIgnoreCase("if-unmodified-since")){
-            if(ServerUtils.compareDate( value , urlFile) == 1 && urlFile.exists())
-                condition = true;
+        if(etag){
+            if(name.equalsIgnoreCase("if-match")){
+                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
+                if(temp!=null && !temp.isValid())
+                    condition = true;
+            }else if(name.equalsIgnoreCase("if-modified-since")){
+                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
+                if(temp!=null && !temp.isValid())
+                    condition = true;
+            }else if(name.equalsIgnoreCase("if-none-match")){
+                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
+                if(temp!=null && temp.isValid())
+                    condition = true;    
+            }else if(name.equalsIgnoreCase("if-range")){
+                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
+                if(temp!=null && !temp.isValid())
+                    condition = true;
+            }else if(name.equalsIgnoreCase("if-unmodified-since")){
+                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
+                if(temp!=null && temp.isValid())
+                    condition = true;
+            }
+        }else{
+            if(name.equalsIgnoreCase("if-modified-since")){
+                if(ServerUtils.compareDate( value , urlFile) == 1 && urlFile.exists())
+                    condition = true;
+            }else if(name.equalsIgnoreCase("if-range")){
+                if(ServerUtils.compareDate( value , urlFile) == 1 && urlFile.exists())
+                    condition = true;
+            }else if(name.equalsIgnoreCase("if-unmodified-since")){
+                if(ServerUtils.compareDate( value , urlFile) == -1 && urlFile.exists())
+                    condition = true;
+            }
         }
     }
     

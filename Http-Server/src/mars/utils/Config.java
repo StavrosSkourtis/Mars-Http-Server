@@ -5,8 +5,10 @@
  */
 package mars.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import mars.http.Entity;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Config {
     
     public static ArrayList<Website> WEBSITES;
     
+    public static ArrayList<Entity> entities;
     
     /*
         Loads settings from config.xml file
@@ -41,6 +44,8 @@ public class Config {
             config = new XMLFile();
             config.read("config.xml");
         }
+        if(entities==null)
+            entities = new ArrayList<>();
         
         
         /*
@@ -203,9 +208,27 @@ public class Config {
         
     }
     
+    /*
+        Etag utils
+    */
     
-    public void reloadSites(){
-        
-        
+    public static Entity getEntity(String etag){
+        for(int i=0;i<entities.size();i++)
+            if (entities.get(i).getEtag().equals(etag)) {
+                return entities.get(i);
+            }
+        return null;
+    }
+    
+    public static Entity getEntity(File file){
+        for(int i=0;i<entities.size();i++)
+            if (entities.get(i).getFile().equals(file) ) {
+                return entities.get(i);
+            }
+        return null;
+    }
+    
+    public static void createEntity(File file){
+        entities.add(new Entity(file));
     }
 }

@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/gui/ServerOptions.java</file>
-            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/gui/WebsitePanel.java</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/http/HTTPResponse.java</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/utils/Config.java</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/http/ServerUtils.java</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/config.xml</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/www/style.css</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/http/HTTPRequestHandler.java</file>
+            <file>file:/H:/Programming%20Source%20Code/Mars-Http-Server-/Http-Server/src/mars/http/HTTPHeader.java</file>
         </group>
     </open-files>
 </project-private>

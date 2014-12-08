@@ -73,21 +73,14 @@ public class HTTPServer extends Thread{
         while(run){
             
                 try{
-                     
+                    Socket client; 
                     // Listen for new requests and accept them
-                    if(ssl){
-                        SSLSocket client = (SSLSocket) serverSocket.accept();
+                    if(ssl)
+                        client = (SSLSocket) serverSocket.accept();
+                    else
+                        client = serverSocket.accept();
                         
-                        // Start a new thread for every request and go back go listening
-                        new ClientThread(client.getInputStream(),client.getOutputStream(),root,client.getInetAddress().toString(),client.getPort()).start();
-                      
-                    }else{
-                        Socket client = serverSocket.accept();
-                        
-                        // Start a new thread for every request and go back go listening
-                        new ClientThread(client.getInputStream(),client.getOutputStream(),root,client.getInetAddress().toString(),client.getPort()).start();
-                    }
-                    
+                    new ClientThread(client,root).start();
                 }catch(IOException e){
                    // e.printStackTrace();
                 }

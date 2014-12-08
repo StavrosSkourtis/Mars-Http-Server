@@ -15,7 +15,7 @@
 <page value="default.htm" ></page>
 <page value="hello.html" ></page>
 </defaults>
-<php allow="false" path="php-cgi.exe" ></php>
+<php allow="true" path="" ></php>
 <blacklist >    
 <ip address="192.168.1.1" ></ip>
 </blacklist>

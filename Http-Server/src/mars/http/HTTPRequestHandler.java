@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static mars.http.HTTPStatus.*;
 import mars.utils.Config;
 import mars.utils.Logger;
+import sun.net.util.URLUtil;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -62,16 +63,33 @@ public class HTTPRequestHandler {
         /*
             If true the project is modified
         */
-        if (request.getHeader("if-un-modified-since")!=null && request.urlFile.exists() && !request.getHeader("if-un-modified-since").getCondition()){ 
+        if (request.getHeader("if-un-modified-since")!=null && request.urlFile.exists() && request.getHeader("if-un-modified-since").getCondition()){ 
             response = code412();
             return;
         }
-
+        
+        
         /*
             If true the project is not modified , so 304 status code is send back
         */
-        if(request.getHeader("if-modified-since")!=null && request.urlFile.exists() && !request.getHeader("if-modified-since").getCondition()){
+        if(request.getHeader("if-modified-since")!=null && request.urlFile.exists() && request.getHeader("if-modified-since").getCondition()){
             response = code304();
+            return;
+        }
+        
+        /*
+            If match condition
+        */
+        if (request.getHeader("if-match")!=null && request.urlFile.exists() && request.getHeader("if-match").getCondition() ){
+            response = code412();
+            return;
+        }
+        
+        /*
+            If not match condition
+        */
+        if (request.getHeader("if-none-match")!=null && request.urlFile.exists() && request.getHeader("if-none-match").getCondition() ){
+            response = code412();
             return;
         }
         
@@ -129,7 +147,7 @@ public class HTTPRequestHandler {
     
     private void get() throws IOException{
         boolean exists = false;
-       
+        
         if(request.urlFile.exists()){
             if(request.urlFile.isDirectory()){
                 String tempPath = request.urlFile.getPath();
@@ -150,13 +168,61 @@ public class HTTPRequestHandler {
         }
         
         if(exists){
-            byte[] body = ServerUtils.getBinaryFile(request.urlFile);
             
             response.setStatusCode(HTTP_VERSION+" 200 OK");
             response.addHeader("connection", request.getHeaderField("connection"));
             response.addHeader("date", ServerUtils.getServerTime());
             response.addHeader("server",SERVER_NAME);
-            response.addHeader("last-modified", String.valueOf(request.urlFile.lastModified()));
+            
+            
+            byte[] body;
+            if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){
+                /*
+                    Handling PHP files
+                */
+                ArrayList<String> script = ServerUtils.runPHP(request.urlFile);
+                
+                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
+                script.remove(0);
+                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
+                script.remove(0);
+                
+                String buffer = "";
+                for(String line :script)
+                    buffer +=line;
+                
+                body = buffer.getBytes();
+            }else{
+                /*
+                    Everything else ...
+                */
+                if(request.getHeader("range")!=null && request.getHeaderField("range").contains("bytes")){
+                    String numbers[] = request.getHeaderField("range").split("=")[1].split(".");
+                    int start = !numbers[0].equals("")? Integer.parseInt(numbers[0]):0;
+                    int end =!numbers[1].equals("")? Integer.parseInt(numbers[1]):0;
+                       
+                    
+                    if(request.getHeader("if-range")!=null && !request.getHeader("if-range").getCondition()){
+                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
+                    }else if(request.getHeader("if-range")!=null){
+                        body = ServerUtils.getBinaryFile(request.urlFile);                        
+                    }else{
+                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
+                    }
+                }else{
+                    body = ServerUtils.getBinaryFile(request.urlFile);
+                }
+                
+                response.addHeader("content-type", ServerUtils.getContentType( request.urlFile.getPath().substring(request.urlFile.getPath().lastIndexOf(".")+1)));
+                
+                
+                if(Config.getEntity(request.urlFile)!=null && !Config.getEntity(request.urlFile).isValid())
+                    Config.getEntity(request.urlFile).generateEtag();
+                else
+                    Config.createEntity(request.urlFile);
+                response.addHeader("etag", Config.getEntity(request.urlFile).getEtag());
+            }
+            response.addHeader("last-modified",ServerUtils.longToDate(request.urlFile.lastModified()));
             response.addHeader("content-length", String.valueOf(body.length));
             response.addBody(body);
         }else

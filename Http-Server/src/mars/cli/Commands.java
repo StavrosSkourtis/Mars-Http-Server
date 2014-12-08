@@ -132,7 +132,7 @@ public class Commands {
                             Config.WEBSITES.get(index).setSslPass(sslPass);
                     }
                     
-                    
+                    Config.WEBSITES.get(index).resume();
                     Config.saveChanges();
                     System.out.println("Site changed successfuly\n");
                     

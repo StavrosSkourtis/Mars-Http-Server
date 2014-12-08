@@ -44,8 +44,8 @@ public class HTTPResponse {
         for(String header : headers){
             out.writeBytes(header+"\r\n");
         }
-        
         out.writeBytes("\r\n");
+        
         if(body!=null)
             out.write(body);
     }
