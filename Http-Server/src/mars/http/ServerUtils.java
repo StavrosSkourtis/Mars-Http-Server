@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.TimeZone;
 import mars.utils.Config;
@@ -55,8 +56,25 @@ public class ServerUtils {
     }
     
     
+    /**
+     *  Converts a byte array to String
+     *  to call this you must be sure the 
+     *  array contains chars
+     * @param bytes
+     * @return 
+     */
+    public static String charBytesToString(byte[] bytes){
+        String buffer = "";
+        for(int i=0;i<bytes[i];i++)
+            buffer += (char)bytes[i];
+        return buffer;
+    }
     
-    
+    /**
+     * 
+     * @param s the string to check if it is numeric
+     * @return true if numeric else false
+     */
     public static boolean isNumeric(String s){
         for(int i=0;i<s.length();i++)
             if(s.charAt(i) < '0' || s.charAt(i) > '9')
@@ -170,23 +188,66 @@ public class ServerUtils {
      * @param script the script File
      * @return the output as a list of Strings
      */
-    public static ArrayList<String> runPHP(File script){
+    public static ArrayList<String> runPHP(String query,String method ,File urlFile){
+        // If method equals POST we run the other method, this one prosseces only GET
+        if(method.equalsIgnoreCase("post"))
+            return runPHPPost(query,urlFile);
+        
+        // We will store here the output
         ArrayList<String> output = new ArrayList<>();
-        try{
-            Process p = Runtime.getRuntime().exec(new String[]{Config.PHP_PATH,script.getAbsolutePath()});
+        try{  
+            // this will hold the arguments
+            String args[];
             
+            //we fill the args array 
+            if(!query.equals("")){
+                String params[];
+                if(query.contains("&"))
+                    params = query.split("\\&");
+                else{
+                    params = new String[1];
+                    params[0] = query;
+                }
+                args = new String[params.length+2];
+
+                args[0] = Config.PHP_PATH;
+                args[1] = urlFile.getAbsolutePath();
+
+                for(int i=2;i<args.length;i++){
+                    args[i] = params[i-2];
+                }
+            }else{
+                args = new String[2];
+
+                args[0] = Config.PHP_PATH;
+                args[1] = urlFile.getAbsolutePath();
+            }
+            
+            // start the php process
+            Process p = Runtime.getRuntime().exec(args);
+            
+            // get php's output stream
             DataInputStream in = new DataInputStream(p.getInputStream());
             
+            // we store all the lines
             String line;
             while((line=in.readLine())!=null){
                 output.add(line);
-                System.out.println(line);
             }
             
-
-        }catch(Exception e){}
+        }catch(Exception e){e.printStackTrace();}
+        //return the output
         return output;
     }
+    
+    
+    private static ArrayList<String> runPHPPost(String query,File urlFile){
+        /*
+            Why did i even bother with php???
+         */
+        return null;
+    }
+    
     
     public static String getContentType(String type){ 
         

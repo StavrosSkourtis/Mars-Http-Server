@@ -179,8 +179,15 @@ public class HTTPRequestHandler {
             if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){
                 /*
                     Handling PHP files
+                    SET "QUERY_STRING=<parameter1>=<value1>&<parameter2>=<value2>&[...]&<paramterN>=<valueN>"
+                    SET SCRIPT_NAME=<script-file-name>
+                    SET REQUEST_METHOD=GET
                 */
-                ArrayList<String> script = ServerUtils.runPHP(request.urlFile);
+                
+                
+                ArrayList<String> script = ServerUtils.runPHP(request.query,"get",request.urlFile);
+                
+                
                 
                 response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
                 script.remove(0);
@@ -234,8 +241,97 @@ public class HTTPRequestHandler {
         
     }
     
+    /**
+     *  The same as get but without the body
+     */
     private void head(){
+        boolean exists = false;
         
+        if(request.urlFile.exists()){
+            if(request.urlFile.isDirectory()){
+                String tempPath = request.urlFile.getPath();
+                for (String defaultPage : Config.DEFAULT_PAGES) {    
+                    if (tempPath.endsWith("/")) {
+                        request.urlFile = new File(tempPath+defaultPage);
+                    }else {
+                        request.urlFile = new File(tempPath+"/"+defaultPage);
+                    }
+                    if(request.urlFile.exists()){
+                        exists = true;
+                        break;
+                    }
+                }
+            }else{     
+                exists = true;
+            }
+        }
+        
+        if(exists){
+            
+            response.setStatusCode(HTTP_VERSION+" 200 OK");
+            response.addHeader("connection", request.getHeaderField("connection"));
+            response.addHeader("date", ServerUtils.getServerTime());
+            response.addHeader("server",SERVER_NAME);
+            
+            
+            byte[] body;
+            if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){
+                /*
+                    Handling PHP files
+                    SET "QUERY_STRING=<parameter1>=<value1>&<parameter2>=<value2>&[...]&<paramterN>=<valueN>"
+                    SET SCRIPT_NAME=<script-file-name>
+                    SET REQUEST_METHOD=GET
+                */
+                
+                
+                ArrayList<String> script = ServerUtils.runPHP(request.query,"get",request.urlFile);
+                
+                
+                
+                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
+                script.remove(0);
+                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
+                script.remove(0);
+                
+                String buffer = "";
+                for(String line :script)
+                    buffer +=line;
+                
+                body = buffer.getBytes();
+            }else{
+                /*
+                    Everything else ...
+                */
+                if(request.getHeader("range")!=null && request.getHeaderField("range").contains("bytes")){
+                    String numbers[] = request.getHeaderField("range").split("=")[1].split(".");
+                    int start = !numbers[0].equals("")? Integer.parseInt(numbers[0]):0;
+                    int end =!numbers[1].equals("")? Integer.parseInt(numbers[1]):0;
+                       
+                    
+                    if(request.getHeader("if-range")!=null && !request.getHeader("if-range").getCondition()){
+                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
+                    }else if(request.getHeader("if-range")!=null){
+                        body = ServerUtils.getBinaryFile(request.urlFile);                        
+                    }else{
+                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
+                    }
+                }else{
+                    body = ServerUtils.getBinaryFile(request.urlFile);
+                }
+                
+                response.addHeader("content-type", ServerUtils.getContentType( request.urlFile.getPath().substring(request.urlFile.getPath().lastIndexOf(".")+1)));
+                
+                
+                if(Config.getEntity(request.urlFile)!=null && !Config.getEntity(request.urlFile).isValid())
+                    Config.getEntity(request.urlFile).generateEtag();
+                else
+                    Config.createEntity(request.urlFile);
+                response.addHeader("etag", Config.getEntity(request.urlFile).getEtag());
+            }
+            response.addHeader("last-modified",ServerUtils.longToDate(request.urlFile.lastModified()));
+            response.addHeader("content-length", String.valueOf(body.length));
+        }else
+            response = code404();
     }
     
     private void put() throws IOException{

@@ -1,5 +1,6 @@
 <?php 
 	print "The php part works!!";
+        print "get".$_GET['id'];
 ?>
 
 <html>

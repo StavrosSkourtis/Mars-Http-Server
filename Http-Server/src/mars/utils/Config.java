@@ -85,7 +85,7 @@ public class Config {
         /*
             Loading php settings
         */
-        PHP_PATH = config.getChildrenByName("php").get(0).getAttribute("path");
+        PHP_PATH = config.getChildrenByName("php").get(0).getAttribute("path").replace('&',' ');
         PHP_ENABLED = config.getChildrenByName("php").get(0).getAttribute("allow").equals("true");
         
         
@@ -127,7 +127,7 @@ public class Config {
         /*
             Save php settings 
         */
-        config.getChildrenByName("php").get(0).setAttribute("path", PHP_PATH);
+        config.getChildrenByName("php").get(0).setAttribute("path", PHP_PATH.replace(' ', '&'));
         config.getChildrenByName("php").get(0).setAttribute("allow", PHP_ENABLED?"true":"false");
         
         

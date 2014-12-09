@@ -20,6 +20,7 @@ public class HTTPRequest {
     public String protocolVersion;
     public String url;
     public String method;
+    public String query;
     public File urlFile;
     
     
@@ -104,7 +105,14 @@ public class HTTPRequest {
         url = requestLine[1];
         protocolVersion = requestLine[2];
         
-        urlFile = new File(root+url);
+        if(url.contains("?")){
+            String[] t = url.split("\\?");
+            query = t[1];
+            urlFile = new File(root+t[0]);
+        }else{
+            query = "";
+            urlFile = new File(root+url);
+        }
         
        
         /*
