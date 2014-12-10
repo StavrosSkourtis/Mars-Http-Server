@@ -1,9 +1,7 @@
 package mars.http;
 
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -16,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.Locale;
 import java.util.TimeZone;
 import mars.utils.Config;
@@ -35,7 +32,7 @@ public class ServerUtils {
     /**
      * 
      * @param date1 first date
-     * @param date2 second date
+     * @param file the file we must compare the last modified date with the @date1
      * @return 0 if equal, >0 if date1 is older , <0 if date1 is more recent than date2
      */
     public static int compareDate(String date1 , File file){
@@ -65,7 +62,7 @@ public class ServerUtils {
      */
     public static String charBytesToString(byte[] bytes){
         String buffer = "";
-        for(int i=0;i<bytes[i];i++)
+        for(int i=0;i<bytes.length;i++)
             buffer += (char)bytes[i];
         return buffer;
     }
@@ -185,67 +182,71 @@ public class ServerUtils {
     }
     
     /**
-     * @param script the script File
+     * @param request the HTTP Request
+     * @param urlFile the file we must read
      * @return the output as a list of Strings
      */
-    public static ArrayList<String> runPHP(String query,String method ,File urlFile){
-        // If method equals POST we run the other method, this one prosseces only GET
-        if(method.equalsIgnoreCase("post"))
-            return runPHPPost(query,urlFile);
-        
+    public static ArrayList<String> runPHP(HTTPRequest request,File urlFile){
         // We will store here the output
-        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> output = new ArrayList<String>();
         try{  
-            // this will hold the arguments
-            String args[];
             
-            //we fill the args array 
-            if(!query.equals("")){
-                String params[];
-                if(query.contains("&"))
-                    params = query.split("\\&");
-                else{
-                    params = new String[1];
-                    params[0] = query;
-                }
-                args = new String[params.length+2];
-
-                args[0] = Config.PHP_PATH;
-                args[1] = urlFile.getAbsolutePath();
-
-                for(int i=2;i<args.length;i++){
-                    args[i] = params[i-2];
-                }
+            //add all cgi enviromental variables to an array list 
+            ArrayList<String> envList = new ArrayList<>();
+            //envList.add("DOCUMENT_ROOT=H:\\Programming Source Code\\Mars-");
+            //envList.add( "HTTP_COOKIE=");
+            //envList.add( "HTTP_HOST=");
+            //envList.add("HTTPS=");
+            //envList.add("PATH=");         
+            // envList.add("REMOTE_ADDR=");
+            // envList.add("REMOTE_HOST=");
+            // envList.add("REMOTE_PORT=");
+            // envList.add("REMOTE_USER=");
+            // envList.add("REQUEST_URI=");
+            // envList.add("SERVER_ADMIN=");
+            // envList.add("SERVER_SOFTWARE=");
+            if(request.method.equalsIgnoreCase("post")){
+                envList.add("QUERY_STRING=");
+                if(request.getHeader("CONTENT-TYPE")!=null) envList.add("CONTENT_TYPE="+request.getHeaderField("CONTENT-TYPE"));
+                envList.add("CONTENT_LENGTH="+request.query.length());
             }else{
-                args = new String[2];
-
-                args[0] = Config.PHP_PATH;
-                args[1] = urlFile.getAbsolutePath();
+                envList.add("QUERY_STRING="+request.query);
             }
+            if(request.getHeader("referer")!=null) envList.add("HTTP_REFERER="+request.getHeaderField("referer"));
+            if(request.getHeader("user-agent")!=null) envList.add( "HTTP_USER_AGENT="+request.getHeaderField("user-agent"));
+            envList.add("GATEWAY_INTERFACE=CGI/1.1");
+            envList.add("REQUEST_METHOD="+request.method);
+            envList.add("SCRIPT_FILENAME="+urlFile.getAbsolutePath());
+            envList.add("SCRIPT_NAME="+urlFile.getName());
+            envList.add("SERVER_PORT=81");
+            envList.add("SERVER_NAME="+HTTPStatus.SERVER_NAME);
+            envList.add("REDIRECT_STATUS=CGI");        
+            
+            //Convert the list to an array
+            String[] env = new String[envList.size()];
+            envList.toArray(env);
             
             // start the php process
-            Process p = Runtime.getRuntime().exec(args);
+            Process p = Runtime.getRuntime().exec(new String[]{Config.PHP_PATH},env);
             
             // get php's output stream
-            DataInputStream in = new DataInputStream(p.getInputStream());
+            DataInputStream sdtOut = new DataInputStream(p.getInputStream());
+            DataOutputStream sdtIn = new DataOutputStream(p.getOutputStream());
             
+            if(request.method.equalsIgnoreCase("post")){
+                sdtIn.writeBytes(request.query);
+                sdtIn.close();
+            }
             // we store all the lines
             String line;
-            while((line=in.readLine())!=null){
+            while((line=sdtOut.readLine())!=null){
                 output.add(line);
             }
             
+            sdtOut.close();
         }catch(Exception e){e.printStackTrace();}
         //return the output
         return output;
-    }
-    
-    
-    private static ArrayList<String> runPHPPost(String query,File urlFile){
-        /*
-            Why did i even bother with php???
-         */
-        return null;
     }
     
     

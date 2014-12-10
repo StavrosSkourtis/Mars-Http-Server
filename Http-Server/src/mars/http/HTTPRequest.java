@@ -32,7 +32,7 @@ public class HTTPRequest {
         this.root = root;
         headers  = new ArrayList<HTTPHeader>();
     }
-
+    
     
     /**
      * @param name the header name we want
@@ -186,7 +186,9 @@ public class HTTPRequest {
             body[i] = in.readByte();
             i++;
         }
-
+        
+        if(method.equalsIgnoreCase("post"))
+            query = ServerUtils.charBytesToString(body);
     }
     
     

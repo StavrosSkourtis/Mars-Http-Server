@@ -106,7 +106,7 @@ public class HTTPRequestHandler {
                 response = code405();
         }else if(request.method.equalsIgnoreCase("POST")){
             if(Config.POST)
-                post();
+                get();
             else
                 response = code405();
         }else if(request.method.equalsIgnoreCase("HEAD")){
@@ -185,7 +185,7 @@ public class HTTPRequestHandler {
                 */
                 
                 
-                ArrayList<String> script = ServerUtils.runPHP(request.query,"get",request.urlFile);
+                ArrayList<String> script = ServerUtils.runPHP(request,request.urlFile);
                 
                 
                 
@@ -284,7 +284,7 @@ public class HTTPRequestHandler {
                 */
                 
                 
-                ArrayList<String> script = ServerUtils.runPHP(request.query,"get",request.urlFile);
+                ArrayList<String> script = ServerUtils.runPHP(request,request.urlFile);
                 
                 
                 

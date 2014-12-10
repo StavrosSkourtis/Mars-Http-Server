@@ -948,7 +948,13 @@ public class ServerOptions extends javax.swing.JFrame {
     }//GEN-LAST:event_savePHPSettingsActionPerformed
 
     private void phpBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phpBrowseButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser;
+        if (Config.PHP_PATH != "") 
+            // if php path is set we set the choosers default directory the php path
+            chooser = new JFileChooser(Config.PHP_PATH);
+        else
+            // else we point to the user's home directory
+            chooser = new JFileChooser();
         
         if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
             phpPathTextfield.setText(chooser.getSelectedFile().getAbsolutePath());
