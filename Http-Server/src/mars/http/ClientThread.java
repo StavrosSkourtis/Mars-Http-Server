@@ -53,15 +53,20 @@ public class ClientThread extends Thread{
                 int length;
                 
                 //Create a new HTTPRequest (an object that represents it , not an actual http request) and pass it the socket input stream;
-                HTTPRequest request = new HTTPRequest(root);
+                HTTPRequest request = new HTTPRequest(root,client);
                 request.create(in);
                               
                 
 
                 // it parses the request and send back the response
                 HTTPRequestHandler requestProcess = new HTTPRequestHandler(request,out);
+               
+                // create a response
+                requestProcess.process(client.getInetAddress().getHostAddress(),client.getPort());
+                
                 // returns true if keep alive , false if close or not exists
-                connection = requestProcess.process(client.getInetAddress().getHostAddress(),client.getPort());
+                connection = request.getHeader("connection")!=null && request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
+                
                 
             }while(connection);
             

@@ -123,6 +123,21 @@ public class HTTPStatus {
     }
     
     /**
+     * @return 406 Not Acceptable Response
+     */
+    public static HTTPResponse code406(){
+        HTTPResponse response = new HTTPResponse();
+        
+        response.setStatusCode(HTTP_VERSION+" 406 Not Acceptable");
+        response.addHeader("Date", ServerUtils.getServerTime());
+        response.addHeader("Server", SERVER_NAME);
+        response.addHeader("Connection","keep-alive");
+
+                
+        return response;
+    }
+    
+    /**
      * @return 412 PRECONDITION FAILED Response 
      */
     public static HTTPResponse code412(){

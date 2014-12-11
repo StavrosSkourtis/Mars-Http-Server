@@ -33,13 +33,12 @@ public class HTTPRequestHandler {
         response = new HTTPResponse();
     }
     
-    public boolean process(String ip,int port) throws IOException{
+    public void process(String ip,int port) throws IOException{
         runMethod();
         response.send(outStream);
         // adding records to the log file (log.txt)
         Logger.addRecord(ip, port, request.method+" "+request.url , response.getStatusCode());
         
-        return request.getHeaderField("connection")!=null && request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
     }
     
     
@@ -101,17 +100,17 @@ public class HTTPRequestHandler {
                                                             */  
         if(request.method.equalsIgnoreCase("GET")){
             if(Config.GET)
-                get();
+                mainMethods(false);
             else
                 response = code405();
         }else if(request.method.equalsIgnoreCase("POST")){
             if(Config.POST)
-                get();
+                mainMethods(false);
             else
                 response = code405();
         }else if(request.method.equalsIgnoreCase("HEAD")){
             if(Config.HEAD)
-                head();
+                mainMethods(true);
             else
                 response = code405();
         }else if(request.method.equalsIgnoreCase("PUT")){
@@ -141,11 +140,20 @@ public class HTTPRequestHandler {
                 response = code405();
         }else{
             response = code400();
-        };
+        }
         
     } 
     
-    private void get() throws IOException{
+    /**
+     * this handles the post,get and head methods 
+     * head is the same as get but without a body
+     * 
+     *
+     * 
+     * @param head
+     * @throws IOException 
+     */
+    private void mainMethods(boolean head) throws IOException{
         boolean exists = false;
         
         if(request.urlFile.exists()){
@@ -169,6 +177,17 @@ public class HTTPRequestHandler {
         
         if(exists){
             
+            if(request.getHeader("accept")!=null){
+                String extention = request.urlFile.getPath().substring(request.urlFile.getPath().lastIndexOf(".")+1);
+                if(!request.getHeaderField("accept").contains("*/*"))
+                    if(!request.getHeaderField("accept").contains(ServerUtils.getContentType(extention)) ){
+                        if(!request.getHeaderField("accept").contains(ServerUtils.getGeneralContentType(extention))){
+                            response = code406();
+                            return;
+                        }
+                    }
+            }
+  
             response.setStatusCode(HTTP_VERSION+" 200 OK");
             response.addHeader("connection", request.getHeaderField("connection"));
             response.addHeader("date", ServerUtils.getServerTime());
@@ -176,17 +195,8 @@ public class HTTPRequestHandler {
             
             
             byte[] body;
-            if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){
-                /*
-                    Handling PHP files
-                    SET "QUERY_STRING=<parameter1>=<value1>&<parameter2>=<value2>&[...]&<paramterN>=<valueN>"
-                    SET SCRIPT_NAME=<script-file-name>
-                    SET REQUEST_METHOD=GET
-                */
-                
-                
+            if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){    
                 ArrayList<String> script = ServerUtils.runPHP(request,request.urlFile);
-                
                 
                 
                 response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
@@ -231,109 +241,17 @@ public class HTTPRequestHandler {
             }
             response.addHeader("last-modified",ServerUtils.longToDate(request.urlFile.lastModified()));
             response.addHeader("content-length", String.valueOf(body.length));
-            response.addBody(body);
+            if(!head)
+                response.addBody(body);
         }else
             response = code404();
-    }
-    
-    
-    private void post(){
-        
     }
     
     /**
-     *  The same as get but without the body
+     * implementing put HTTP method
+     * @throws IOException 
      */
-    private void head(){
-        boolean exists = false;
         
-        if(request.urlFile.exists()){
-            if(request.urlFile.isDirectory()){
-                String tempPath = request.urlFile.getPath();
-                for (String defaultPage : Config.DEFAULT_PAGES) {    
-                    if (tempPath.endsWith("/")) {
-                        request.urlFile = new File(tempPath+defaultPage);
-                    }else {
-                        request.urlFile = new File(tempPath+"/"+defaultPage);
-                    }
-                    if(request.urlFile.exists()){
-                        exists = true;
-                        break;
-                    }
-                }
-            }else{     
-                exists = true;
-            }
-        }
-        
-        if(exists){
-            
-            response.setStatusCode(HTTP_VERSION+" 200 OK");
-            response.addHeader("connection", request.getHeaderField("connection"));
-            response.addHeader("date", ServerUtils.getServerTime());
-            response.addHeader("server",SERVER_NAME);
-            
-            
-            byte[] body;
-            if(request.urlFile.getAbsolutePath().endsWith(".php") && Config.PHP_ENABLED){
-                /*
-                    Handling PHP files
-                    SET "QUERY_STRING=<parameter1>=<value1>&<parameter2>=<value2>&[...]&<paramterN>=<valueN>"
-                    SET SCRIPT_NAME=<script-file-name>
-                    SET REQUEST_METHOD=GET
-                */
-                
-                
-                ArrayList<String> script = ServerUtils.runPHP(request,request.urlFile);
-                
-                
-                
-                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
-                script.remove(0);
-                response.addHeader(script.get(0).split(":")[0].trim(), script.get(0).split(":")[1].trim());
-                script.remove(0);
-                
-                String buffer = "";
-                for(String line :script)
-                    buffer +=line;
-                
-                body = buffer.getBytes();
-            }else{
-                /*
-                    Everything else ...
-                */
-                if(request.getHeader("range")!=null && request.getHeaderField("range").contains("bytes")){
-                    String numbers[] = request.getHeaderField("range").split("=")[1].split(".");
-                    int start = !numbers[0].equals("")? Integer.parseInt(numbers[0]):0;
-                    int end =!numbers[1].equals("")? Integer.parseInt(numbers[1]):0;
-                       
-                    
-                    if(request.getHeader("if-range")!=null && !request.getHeader("if-range").getCondition()){
-                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
-                    }else if(request.getHeader("if-range")!=null){
-                        body = ServerUtils.getBinaryFile(request.urlFile);                        
-                    }else{
-                        body = ServerUtils.getBinaryFile(request.urlFile , start ,end);                      
-                    }
-                }else{
-                    body = ServerUtils.getBinaryFile(request.urlFile);
-                }
-                
-                response.addHeader("content-type", ServerUtils.getContentType( request.urlFile.getPath().substring(request.urlFile.getPath().lastIndexOf(".")+1)));
-                
-                
-                if(Config.getEntity(request.urlFile)!=null && !Config.getEntity(request.urlFile).isValid())
-                    Config.getEntity(request.urlFile).generateEtag();
-                else
-                    Config.createEntity(request.urlFile);
-                response.addHeader("etag", Config.getEntity(request.urlFile).getEtag());
-            }
-            response.addHeader("last-modified",ServerUtils.longToDate(request.urlFile.lastModified()));
-            response.addHeader("content-length", String.valueOf(body.length));
-        }else
-            response = code404();
-    }
-    
     private void put() throws IOException{
         System.out.println("here");
         response = code204();
@@ -343,6 +261,10 @@ public class HTTPRequestHandler {
         System.out.println("here");
     }
     
+    /**
+     * delete http method
+     * @throws IOException 
+     */
     private void delete() throws IOException{
         boolean exists = false;
        
@@ -375,12 +297,20 @@ public class HTTPRequestHandler {
             response = code404();
     }
     
+    /**
+     * Connect http method
+     * @throws IOException 
+     */
     private void connect() throws IOException{
         response.setStatusCode(HTTP_VERSION+" 200 Connection established");
         response.addHeader("date", ServerUtils.getServerTime());
         response.addHeader("server", SERVER_NAME);
     }
     
+    /**
+     * Trace http method
+     * @throws IOException 
+     */
     private void trace()throws IOException{        
         response.setStatusCode(HTTP_VERSION+" 200 OK");
         response.addHeader("date", ServerUtils.getServerTime());
@@ -391,6 +321,10 @@ public class HTTPRequestHandler {
         response.addBody(request.getRequestString().getBytes());
     }
     
+    /**
+     * Options http method
+     * @throws IOException 
+     */
     private void options() throws IOException{   
         String allow= "";
         

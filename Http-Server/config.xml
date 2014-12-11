@@ -13,7 +13,7 @@
 <page value="index.htm" ></page>
 <page value="default.html" ></page>
 <page value="default.htm" ></page>
-<page value="hello.html" ></page>
+<page value="index.php" ></page>
 </defaults>
 <php allow="true" path="C:\Program&Files&(x86)\PHP\v5.6\php-cgi.exe" ></php>
 <blacklist >    

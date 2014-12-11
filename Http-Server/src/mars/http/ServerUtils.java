@@ -193,18 +193,12 @@ public class ServerUtils {
             
             //add all cgi enviromental variables to an array list 
             ArrayList<String> envList = new ArrayList<>();
-            //envList.add("DOCUMENT_ROOT=H:\\Programming Source Code\\Mars-");
-            //envList.add( "HTTP_COOKIE=");
-            //envList.add( "HTTP_HOST=");
+            //
+            //envList.add("HTTP_HOST=");
             //envList.add("HTTPS=");
             //envList.add("PATH=");         
-            // envList.add("REMOTE_ADDR=");
-            // envList.add("REMOTE_HOST=");
-            // envList.add("REMOTE_PORT=");
-            // envList.add("REMOTE_USER=");
-            // envList.add("REQUEST_URI=");
-            // envList.add("SERVER_ADMIN=");
-            // envList.add("SERVER_SOFTWARE=");
+            //envList.add("SERVER_ADMIN=");
+            //envList.add("SERVER_SOFTWARE=");
             if(request.method.equalsIgnoreCase("post")){
                 envList.add("QUERY_STRING=");
                 if(request.getHeader("CONTENT-TYPE")!=null) envList.add("CONTENT_TYPE="+request.getHeaderField("CONTENT-TYPE"));
@@ -214,12 +208,18 @@ public class ServerUtils {
             }
             if(request.getHeader("referer")!=null) envList.add("HTTP_REFERER="+request.getHeaderField("referer"));
             if(request.getHeader("user-agent")!=null) envList.add( "HTTP_USER_AGENT="+request.getHeaderField("user-agent"));
+            if(request.getHeader("cookie")!=null) envList.add( "HTTP_COOKIE="+request.getHeaderField("cookie"));
+            envList.add("REQUEST_URI="+request.url);
             envList.add("GATEWAY_INTERFACE=CGI/1.1");
+            envList.add("REMOTE_ADDR="+request.ip);
+            envList.add("REMOTE_PORT="+request.port);
+            envList.add("REMOTE_HOST="+request.hostname);
             envList.add("REQUEST_METHOD="+request.method);
+            envList.add("DOCUMENT_ROOT="+request.absoluteRoot);
             envList.add("SCRIPT_FILENAME="+urlFile.getAbsolutePath());
             envList.add("SCRIPT_NAME="+urlFile.getName());
             envList.add("SERVER_PORT=81");
-            envList.add("SERVER_NAME="+HTTPStatus.SERVER_NAME);
+            envList.add("SERVER_SOFTWARE="+HTTPStatus.SERVER_NAME);
             envList.add("REDIRECT_STATUS=CGI");        
             
             //Convert the list to an array
@@ -251,7 +251,6 @@ public class ServerUtils {
     
     
     public static String getContentType(String type){ 
-        
         /*
             Image type
         */
@@ -295,8 +294,6 @@ public class ServerUtils {
             return "text/javascript";
         }else if(type.equals("css")){
             return "text/css";
-        }else if(type.equals("java")){
-            return "text/java";
         }else if(type.equals("pdf")){
             return "application/pdf";
         }
@@ -308,8 +305,22 @@ public class ServerUtils {
             return "audio/mp3";
         }
         
-        
         return "text/plain";
     }
     
+    public static String getGeneralContentType(String type){
+        
+        if(type.equals("html") || type.equals("htm") || type.equals("js") || type.equals("css") ){
+            return "text";
+        }else if( type.equals("png") || type.equals("gif") || type.equals("jpg") || type.equals("jpeg") ||
+            type.equals("tif") || type.equals("jif") || type.equals("jfif") || type.equals("fpx")  ||
+            type.equals("jp2") || type.equals("jpx") || type.equals("j2k") || type.equals("j2c")  ||
+            type.equals("pcd")){
+            return "image";
+        }else if( type.equals("pdf")){
+            return "application";
+        }
+        
+        return "text";
+    }
 }   

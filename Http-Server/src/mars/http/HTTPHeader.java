@@ -39,32 +39,62 @@ public class HTTPHeader {
         
         // Check if value contains an etag
         boolean etag  = value.charAt(0)=='"' && value.charAt(value.length()-1)=='"' ;
-        
+        String etags[] = null;
+        if(etag & value.contains(",")){
+            etags=value.split(" ");
+            for(int i=0;i<etags.length-1;i++){
+                etags[i] = etags[i].substring(1,etags[i].length()-2);
+            }
+            etags[etags.length-1] = etags[etags.length-1].substring(1,etags[etags.length-1].length()-1);
+        }else if(etag){
+            etags = new String[1];
+            etags[0] = value.substring(1, value.length()-1);
+        }
         
         /*
-            If the header is conditional we check the condition and update the confition variable
+            If the header is conditional we check the condition and update the condition variable
         */
         if(etag){
             if(name.equalsIgnoreCase("if-match")){
-                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
-                if(temp!=null && !temp.isValid())
-                    condition = true;
+                for (String etag1 : etags) {
+                    Entity temp = Config.getEntity(etag1);
+                    if(temp!=null && !temp.isValid()){
+                        condition = true;
+                        break;
+                    }
+                }
             }else if(name.equalsIgnoreCase("if-modified-since")){
-                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
-                if(temp!=null && !temp.isValid())
-                    condition = true;
+                for (String etag1 : etags) {
+                    Entity temp = Config.getEntity(etag1);
+                    if(temp!=null && !temp.isValid()){
+                        condition = true;
+                        break;
+                    }
+                }
             }else if(name.equalsIgnoreCase("if-none-match")){
-                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
-                if(temp!=null && temp.isValid())
-                    condition = true;    
+                for (String etag1 : etags) {
+                    Entity temp = Config.getEntity(etag1);
+                    if(temp!=null && temp.isValid()){
+                        condition = true;    
+                        break;
+                    }
+                }
             }else if(name.equalsIgnoreCase("if-range")){
-                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
-                if(temp!=null && !temp.isValid())
-                    condition = true;
+                for (String etag1 : etags) {
+                    Entity temp = Config.getEntity(etag1);
+                    if(temp!=null && !temp.isValid()){
+                        condition = true;
+                        break;
+                    }
+                }
             }else if(name.equalsIgnoreCase("if-unmodified-since")){
-                Entity temp = Config.getEntity(value.substring(1, value.length()-1));
-                if(temp!=null && temp.isValid())
-                    condition = true;
+                for (String etag1 : etags) {
+                    Entity temp = Config.getEntity(etag1);
+                    if(temp!=null && temp.isValid()){
+                        condition = true;
+                        break;
+                    }
+                }
             }
         }else{
             if(name.equalsIgnoreCase("if-modified-since")){

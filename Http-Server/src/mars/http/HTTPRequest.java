@@ -8,6 +8,7 @@ package mars.http;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -16,11 +17,14 @@ import java.util.ArrayList;
  */
 public class HTTPRequest {
     public String root;
-    
+    public String absoluteRoot;
     public String protocolVersion;
     public String url;
     public String method;
     public String query;
+    public String ip;
+    public String hostname;
+    public int port;
     public File urlFile;
     
     
@@ -28,9 +32,13 @@ public class HTTPRequest {
     
     public byte[] body;
     
-    public HTTPRequest(String root){
+    public HTTPRequest(String root,Socket client){
         this.root = root;
         headers  = new ArrayList<HTTPHeader>();
+        this.ip = client.getInetAddress().getHostAddress();
+        this.hostname = client.getInetAddress().getHostName();
+        this.port = client.getPort();
+        absoluteRoot = new File(root).getAbsolutePath();
     }
     
     

@@ -23,7 +23,7 @@ public class Entity {
     
     public void generateEtag(){
         created = file.lastModified();
-        etag = created+file.getName();
+        etag = created+file.getName().substring(0, file.getName().indexOf("."));
     }
     
     public String getEtag(){
