@@ -16,21 +16,69 @@ import java.util.ArrayList;
  * @author Stavros Skourtis
  */
 public class HTTPRequest {
+    
+    /**
+     * Server folder root
+     */
     public String root;
+    
+    /**
+     * Absolute path to the root
+     */
     public String absoluteRoot;
+    
+    /**
+     * A String that has the protocol version
+     */
     public String protocolVersion;
+    
+    /**
+     * The url of the request
+     */
     public String url;
+    
+    /**
+     * The request method
+     */
     public String method;
+    
+    /**
+     * Query parameters if any
+     */
     public String query;
+    
+    /**
+     * IP of the client
+     */
     public String ip;
+    
+    /**
+     * Clients hostname
+     */
     public String hostname;
+    /**
+     * The port of the client
+     */
     public int port;
+    /**
+     * The file the client requested
+     */
     public File urlFile;
     
-    
+    /**
+     * A list of headers
+     */
     private ArrayList<HTTPHeader> headers;
+    /**
+     * The request body as an array of bytes
+     */
     public byte[] body;
     
+    /**
+     * creates the request
+     * @param root server root folder
+     * @param client Client's socket
+     */
     public HTTPRequest(String root,Socket client){
         this.root = root;
         headers  = new ArrayList<HTTPHeader>();
@@ -42,6 +90,7 @@ public class HTTPRequest {
     
     
     /**
+     * Gets the value of header
      * @param name the header name we want
      * @return the value of the specified header filed, return null if it doesn't exist 
      */
@@ -53,8 +102,9 @@ public class HTTPRequest {
     }
     
     /**
+     * Gets a header object
      * @param name the name of the header we want
-     * @return the header we want , null if it doesn't exist
+     * @return the header that matches the parameter string , null if it doesn't exist
      */
     public HTTPHeader getHeader(String name){
         for(HTTPHeader header : headers)
@@ -70,6 +120,10 @@ public class HTTPRequest {
      */
     public void create(DataInputStream in) throws IOException{
         int length = readRequestHeader(in);
+        
+        /*
+            If body exists we read it
+        */
         if(length >0)
             readRequestBody(in, length);
     }
@@ -174,7 +228,7 @@ public class HTTPRequest {
     
     
     /**
-     * this will run only if @param bodylength >0 
+     * Reads the body of the the request
      * @param in Socket Input Stream
      * @param bodyLength the length of the body
      * @throws IOException 
@@ -202,7 +256,7 @@ public class HTTPRequest {
     
     /**
      * 
-     * @return the request line + headers as a String , does NOT include the body 
+     * @return returns a string that represents the request
      */
     public String getRequestString(){
         String request="";

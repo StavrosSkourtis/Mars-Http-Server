@@ -11,21 +11,37 @@ package mars.http;
  */
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
 import mars.utils.Config;
 import mars.utils.Logger;
 
 public class ClientThread extends Thread{
     
+    /**
+     * root folder of the server
+     */
     private String root;
+    
+    /**
+     * The clients socket
+     */
     private Socket client;
     
+    
+    /**
+     * Creates a thread that will handle the client
+     * @param client the clients socket
+     * @param root the root folder
+     */
     public ClientThread(Socket client,String root){
         this.root = root;
         this.client = client;
     }
     
                 
+    /**
+     *  Starts this Thread
+     */
+    @Override
     public void run(){
         
         try{
@@ -57,9 +73,9 @@ public class ClientThread extends Thread{
 
                 // it parses the request and send back the response
                 HTTPRequestHandler requestProcess = new HTTPRequestHandler(request,out);
-               
+                
                 // create a response
-                requestProcess.process(client.getInetAddress().getHostAddress(),client.getPort());
+                requestProcess.process();
                 
                 // returns true if keep alive , false if close or not exists
                 connection = request.getHeader("connection")!=null && request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
@@ -72,7 +88,7 @@ public class ClientThread extends Thread{
             out.close();
             client.close();
         }catch(IOException e){   
-            
+            Logger.addRecord(e.getMessage());
         }
     }
     

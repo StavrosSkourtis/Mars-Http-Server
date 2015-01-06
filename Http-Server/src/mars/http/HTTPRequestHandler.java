@@ -24,24 +24,33 @@ public class HTTPRequestHandler {
     private HTTPResponse response;
     private final DataOutputStream outStream;
     
-    /*
-        Constructor
-    */
+    /**
+     * 
+     * @param request The Request object
+     * @param outStream The Output Steam of the Socket
+     */
     public HTTPRequestHandler(HTTPRequest request,DataOutputStream outStream){
         this.request = request;
         this.outStream = outStream;
         response = new HTTPResponse();
     }
     
-    public void process(String ip,int port) throws IOException{
+    /**
+     * Parses the request and send back a response
+     * @throws IOException 
+     */
+    public void process() throws IOException{
         runMethod();
         response.send(outStream);
         // adding records to the log file (log.txt)
-        Logger.addRecord(ip, port, request.method+" "+request.url , response.getStatusCode());
+        Logger.addRecord(request.ip, request.port, request.method+" "+request.url , response.getStatusCode());
         
     }
     
-    
+    /**
+     * Checks the conditional headers and the request methods and creates the response
+     * @throws IOException 
+     */
     private void runMethod() throws IOException{
         /*
             If protocol is not HTTP/1.1 or HTTP/1.0 is is not suported
@@ -147,10 +156,10 @@ public class HTTPRequestHandler {
     /**
      * this handles the post,get and head methods 
      * head is the same as get but without a body
+     * Post  differs with get  in the way we pass 
+     * the cgi query
      * 
-     *
-     * 
-     * @param hasBody
+     * @param hasBody only false if it is a head request method
      * @throws IOException 
      */
     private void mainMethods(boolean hasBody) throws IOException{
@@ -248,7 +257,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * implementing put HTTP method
+     * Implementing put HTTP method
      * @throws IOException 
      */
     private void put() throws IOException{
@@ -259,7 +268,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * delete HTTP method
+     * Implementing delete HTTP method
      * @throws IOException 
      */
     private void delete() throws IOException{
@@ -295,7 +304,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Connect HTTP method
+     * Implementing Connect HTTP method
      * @throws IOException 
      */
     private void connect() throws IOException{
@@ -305,7 +314,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Trace HTTP method
+     * Implementing Trace HTTP method
      * @throws IOException 
      */
     private void trace()throws IOException{        
@@ -319,7 +328,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Options HTTP method
+     * Implementing Options HTTP method
      * @throws IOException 
      */
     private void options() throws IOException{   

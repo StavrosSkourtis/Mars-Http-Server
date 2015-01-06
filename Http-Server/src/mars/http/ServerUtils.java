@@ -68,7 +68,7 @@ public class ServerUtils {
     }
     
     /**
-     * 
+     * Checks if a String is Numeric
      * @param s the string to check if it is numeric
      * @return true if numeric else false
      */
@@ -80,7 +80,7 @@ public class ServerUtils {
     }
         
     /**
-     * 
+     * Gets the Server Time in the correct format as a String
      * @return the current time in correct format as a String , format : EEE, dd MMM yyyy HH:mm:ss z" 
      */
     public static String getServerTime() {
@@ -91,7 +91,7 @@ public class ServerUtils {
     }
     
     /**
-     * 
+     * Gets the Server time in milliseconds
      * @return the current time in milliseconds 
      */
     public static long getServerTimeMillis(){
@@ -100,7 +100,7 @@ public class ServerUtils {
     }
     
     /**
-     * 
+     * Converts a String representing a date to a long representing time
      * @param date the date as String
      * @return the given dare in milliseconds
      */
@@ -113,7 +113,11 @@ public class ServerUtils {
         return 0;
     }
     
-    /** converts the given milliseconds in to a date */
+    /**
+     * Turns a long variable that represents time into a String
+     * @param millis
+     * @return 
+     */
     public static String longToDate(long millis) {
         Date date=new Date(millis);
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
@@ -122,7 +126,7 @@ public class ServerUtils {
     }
     
     /**
-     * Reads a file
+     * Reads a file as Text
      * 
      * @param file the path of the file
      * @return returns content as a String
@@ -141,7 +145,7 @@ public class ServerUtils {
     }
     
     /**
-     * reads a file
+     * Reads file as Bytes
      * @param file the path of the file
      * @return returns the file as an array of bytes
      */
@@ -158,7 +162,7 @@ public class ServerUtils {
     }
     
     /**
-     * reads a file
+     * Reads file as Bytes
      * @param file the path of the file
      * @param start the starting index
      * @param end the last index
@@ -250,6 +254,11 @@ public class ServerUtils {
     }
     
     
+    /**
+     * Returns the correct value for the content-type header
+     * @param type the format of the file
+     * @return the correct header value
+     */
     public static String getContentType(String type){ 
         /*
             Image type
@@ -308,6 +317,12 @@ public class ServerUtils {
         return "text/plain";
     }
     
+    
+    /**
+     * 
+     * @param type
+     * @return 
+     */
     public static String getGeneralContentType(String type){
         
         if(type.equals("html") || type.equals("htm") || type.equals("js") || type.equals("css") ){

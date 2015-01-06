@@ -29,13 +29,34 @@ import javax.print.attribute.standard.ReferenceUriSchemesSupported;
  */
 public class HTTPServer extends Thread{
     
-    public static ArrayList<String> requests;
     
+    /**
+     * The Socket of the server
+     */
     private ServerSocket serverSocket;
-    private boolean run;
+    /**
+     * The root folder of this server
+     */
     private String root;
+    /**
+     * If ssl is enabled
+     */
     private boolean ssl;
+    /**
+     * If is is running
+     */
+    private boolean run;
     
+    /**
+     * Creates an HTTP Server based on the parameters
+     * This class extends Thread
+     * @param root
+     * @param portNumber
+     * @param ssl
+     * @param sslFile
+     * @param sslPass
+     * @throws IOException 
+     */
     public HTTPServer(String root,int portNumber,boolean ssl,String sslFile,String sslPass) throws IOException{
         this.root = root;
         this.ssl = ssl;
@@ -73,6 +94,11 @@ public class HTTPServer extends Thread{
         }
     }
         
+    
+    /**
+     * Overriding Threads run()
+     * this methods will be called start the server
+     */
     @Override
     public void run(){
         while(run){
@@ -94,6 +120,10 @@ public class HTTPServer extends Thread{
         }  
     }
     
+    /**
+     * Its used to close the server/thread
+     * @throws IOException 
+     */
     public void dispose() throws IOException{
         serverSocket.close();
         run = false;
