@@ -150,10 +150,10 @@ public class HTTPRequestHandler {
      * 
      *
      * 
-     * @param head
+     * @param hasBody
      * @throws IOException 
      */
-    private void mainMethods(boolean head) throws IOException{
+    private void mainMethods(boolean hasBody) throws IOException{
         boolean exists = false;
         
         if(request.urlFile.exists()){
@@ -241,7 +241,7 @@ public class HTTPRequestHandler {
             }
             response.addHeader("last-modified",ServerUtils.longToDate(request.urlFile.lastModified()));
             response.addHeader("content-length", String.valueOf(body.length));
-            if(!head)
+            if(!hasBody)
                 response.addBody(body);
         }else
             response = code404();
@@ -251,18 +251,15 @@ public class HTTPRequestHandler {
      * implementing put HTTP method
      * @throws IOException 
      */
-        
     private void put() throws IOException{
-        System.out.println("here");
         response = code204();
         FileOutputStream writer = new FileOutputStream(request.urlFile);
         writer.write(request.body);
         writer.close();
-        System.out.println("here");
     }
     
     /**
-     * delete http method
+     * delete HTTP method
      * @throws IOException 
      */
     private void delete() throws IOException{
@@ -298,7 +295,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Connect http method
+     * Connect HTTP method
      * @throws IOException 
      */
     private void connect() throws IOException{
@@ -308,7 +305,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Trace http method
+     * Trace HTTP method
      * @throws IOException 
      */
     private void trace()throws IOException{        
@@ -322,7 +319,7 @@ public class HTTPRequestHandler {
     }
     
     /**
-     * Options http method
+     * Options HTTP method
      * @throws IOException 
      */
     private void options() throws IOException{   

@@ -29,7 +29,6 @@ public class HTTPRequest {
     
     
     private ArrayList<HTTPHeader> headers;
-    
     public byte[] body;
     
     public HTTPRequest(String root,Socket client){
@@ -83,7 +82,7 @@ public class HTTPRequest {
      */
     private int readRequestHeader(DataInputStream in) throws IOException{  
         /*
-         *  Firest we read the Request line 
+         *  First we read the Request line 
          *  we read chars until we find \r \n 
          *  when we are done we split the String
          *  the first part is the http method
@@ -164,6 +163,7 @@ public class HTTPRequest {
             }else{
                 headers.add(new HTTPHeader(buffer, urlFile));
             }
+            
             
             cr = false;
             lf = false;

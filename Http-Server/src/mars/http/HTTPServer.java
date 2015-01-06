@@ -42,6 +42,9 @@ public class HTTPServer extends Thread{
         run = true;
         // create the server's socket
         if(ssl){
+            /*
+                 SSL stuff
+            */
             try{
                 String password = sslPass;
                 String keystore = sslFile;
@@ -63,6 +66,8 @@ public class HTTPServer extends Thread{
                 serverSocket = (SSLServerSocket) factory.createServerSocket(portNumber);
             }catch(Exception e){e.printStackTrace();}
         }else{
+            
+            // create the server socket and a timeout
             serverSocket = new ServerSocket(portNumber);
             serverSocket.setSoTimeout(15000);
         }
@@ -80,6 +85,7 @@ public class HTTPServer extends Thread{
                     else
                         client = serverSocket.accept();
                         
+                    // start a new thread for every client and go back to listening for clients
                     new ClientThread(client,root).start();
                 }catch(IOException e){
                    // e.printStackTrace();

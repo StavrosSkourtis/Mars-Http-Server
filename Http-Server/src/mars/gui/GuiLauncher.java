@@ -28,7 +28,8 @@ import mars.utils.Logger;
  * @author Phenom
  */
 public class GuiLauncher {
-    public GuiLauncher() throws IOException{
+    
+    public GuiLauncher() throws IOException {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -46,49 +47,57 @@ public class GuiLauncher {
             java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        ServerOptions gui= new ServerOptions();
-        About guiAbout = new About();
+        final ServerOptions gui = new ServerOptions();
+        final About guiAbout = new About();
         // java 1.6 and above supports System Tray applications
-        if(SystemTray.isSupported()){
-            
+        if (SystemTray.isSupported()) {
+
             //Create the menu
             PopupMenu popup = new PopupMenu();
             Logger.init();
-            
+
             //Create the Menu Items
-            MenuItem log =        new MenuItem("       Log");
-            MenuItem options =    new MenuItem("       Control Panel");
-            MenuItem about  =     new MenuItem("       About");
-            MenuItem exit =       new MenuItem("       Exit");
+            final MenuItem log = new MenuItem("       Log");
+            final MenuItem options = new MenuItem("       Control Panel");
+            final MenuItem about = new MenuItem("       About");
+            final MenuItem exit = new MenuItem("       Exit");
             
-            
-            //Add Listeners
-            // We need this one for double clicking on tray and when options is clicked
-            // starts options gui
-            ActionListener listener = (ActionEvent e) -> {
-                gui.setVisible(!gui.isVisible());
+            ActionListener listener = new ActionListener() {
+                
+                public void actionPerformed(ActionEvent e) {
+                    gui.setVisible(!gui.isVisible());
+                }
             };
             
             options.addActionListener(listener);
             
-            about.addActionListener((ActionEvent e) -> {
-                guiAbout.setVisible(!guiAbout.isVisible());
-            });
-            
-            exit.addActionListener((ActionEvent e) -> {
-                //Exits application
-                Logger.dispose();
-                System.exit(0);
-            });
-            
-            log.addActionListener((ActionEvent e) -> {
-                try{
-                    Desktop.getDesktop().edit(new File("log.txt"));
-                }catch(IOException ee){
-                    
+            about.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    guiAbout.setVisible(!guiAbout.isVisible());
                 }
             });
             
+            exit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //Exits application
+                    Logger.dispose();
+                    System.exit(0);
+                }
+            });
+            
+            log.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Desktop.getDesktop().edit(new File("log.txt"));
+                    } catch (IOException ee) {
+                        
+                    }
+                }
+            });
+
             // add menu items to the menu
             popup.add(log);
             popup.add(options);
@@ -96,7 +105,7 @@ public class GuiLauncher {
             popup.add(about);
             popup.addSeparator();
             popup.add(exit);
-                   
+
             // get System tray
             SystemTray tray = SystemTray.getSystemTray();
             // get the tray icon's image
@@ -104,20 +113,18 @@ public class GuiLauncher {
             
             BufferedImage trayIconImage = ImageIO.read(new FileInputStream("img/icon.png"));
             int trayIconWidth = new TrayIcon(trayIconImage).getSize().width;
- 
+
             // create the tray icon
             TrayIcon icon = new TrayIcon(trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH), "HTTP Server", popup);
             // add the listener that start the options gui
             icon.addActionListener(listener);
-            
+
             // add the tray icon to system tray
             try {
                 tray.add(icon);
             } catch (AWTException e) {
                 System.err.println(e);
             }
-            
-            
             
         }
     }

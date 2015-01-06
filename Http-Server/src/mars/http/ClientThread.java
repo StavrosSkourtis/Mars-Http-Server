@@ -19,6 +19,7 @@ public class ClientThread extends Thread{
     
     private String root;
     private Socket client;
+    
     public ClientThread(Socket client,String root){
         this.root = root;
         this.client = client;
@@ -41,17 +42,13 @@ public class ClientThread extends Thread{
             }
         
         
-            // get socket i/o
+            // get socket input and output streams
             DataInputStream in = new DataInputStream(client.getInputStream());
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
+            
             boolean connection;
             
-            do{
-                // clear the list so we can handle new a request
-               
-                
-                int length;
-                
+            do{              
                 //Create a new HTTPRequest (an object that represents it , not an actual http request) and pass it the socket input stream;
                 HTTPRequest request = new HTTPRequest(root,client);
                 request.create(in);

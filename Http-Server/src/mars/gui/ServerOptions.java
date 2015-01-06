@@ -1,7 +1,5 @@
 package mars.gui;
 
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -30,36 +28,41 @@ import mars.utils.XMLFile;
  * @author Stavros Skourtis
  */
 public class ServerOptions extends javax.swing.JFrame {
-    
-    private int nextConnection=0;
+
+    private int nextConnection = 0;
     private DefaultListModel pageListModel = new DefaultListModel();
     private DefaultListModel blackListModel = new DefaultListModel();
+
     /**
      * Creates new form ServerOptions
      */
-    public ServerOptions() throws IOException{
+    public ServerOptions() throws IOException {
         initComponents();
-        
+
         /*
-            Updates connections tab every 1 second
-        */                
+         Updates connections tab every 1 second
+         */
         final Timer timer = new Timer(1000, null);
-        timer.addActionListener((ActionEvent e) -> {
-            if(nextConnection<Logger.connections.size()){
-                for(; nextConnection<Logger.connections.size();nextConnection++){
-                    ipField.setText(ipField.getText()+Logger.connections.get(nextConnection).getIp()+"<br>");
-                    portField.setText(portField.getText()+String.valueOf(Logger.connections.get(nextConnection).getPort())+"<br>");
-                    requestField.setText(requestField.getText()+Logger.connections.get(nextConnection).getRequestline()+"<br>");
-                    responseField.setText(responseField.getText()+Logger.connections.get(nextConnection).getResponseCode()+"<br>");
-                } 
+        
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (nextConnection < Logger.connections.size()) {
+                    for (; nextConnection < Logger.connections.size(); nextConnection++) {
+                        ipField.setText(ipField.getText() + Logger.connections.get(nextConnection).getIp() + "<br>");
+                        portField.setText(portField.getText() + String.valueOf(Logger.connections.get(nextConnection).getPort()) + "<br>");
+                        requestField.setText(requestField.getText() + Logger.connections.get(nextConnection).getRequestline() + "<br>");
+                        responseField.setText(responseField.getText() + Logger.connections.get(nextConnection).getResponseCode() + "<br>");
+                    }
+                }
             }
         });
+        
         timer.start();
-        
-        
+
         /*
-            Load which methods are allow from config
-        */
+         Load which methods are allow from config
+         */
         getCheckBox.setSelected(Config.GET);
         postCheckBox.setSelected(Config.POST);
         headCheckBox.setSelected(Config.HEAD);
@@ -68,43 +71,37 @@ public class ServerOptions extends javax.swing.JFrame {
         deleteCheckBox.setSelected(Config.DELETE);
         putCheckBox.setSelected(Config.PUT);
         connectCheckBox.setSelected(Config.CONNECT);
-        
-        
+
         /*
-            Load php from config
-        */
+         Load php from config
+         */
         phpEnable.setSelected(Config.PHP_ENABLED);
         phpPathTextfield.setText(Config.PHP_PATH);
-        
-        
+
         /*
-            Load default pages from config
-        */
-        for(String page : Config.DEFAULT_PAGES){
+         Load default pages from config
+         */
+        for (String page : Config.DEFAULT_PAGES) {
             pageListModel.addElement(page);
         }
-        
-        
+
         /*
-            Load black list from config
-        */
-        for(String page : Config.BLACK_LIST){
+         Load black list from config
+         */
+        for (String page : Config.BLACK_LIST) {
             blackListModel.addElement(page);
         }
-        
+
         /*
-            Load websites from config
-        */
-        
-        for(Website site: Config.WEBSITES){
-            websiteTabPane.addTab(String.valueOf(site.getId())+"::"+site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(),site.getId(),site.getSslFile(),site.getSslPass()));
+         Load websites from config
+         */
+        for (Website site : Config.WEBSITES) {
+            websiteTabPane.addTab(String.valueOf(site.getId()) + "::" + site.getPort(), new WebsitePanel(site.getPath(), site.getPort(), site.isSsl(), site.isOnline(), site.getId(), site.getSslFile(), site.getSslPass()));
         }
-        
-        
+
         versionLabel.setText(HTTPStatus.SERVER_NAME);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -818,50 +815,52 @@ public class ServerOptions extends javax.swing.JFrame {
     }//GEN-LAST:event_defaultFileTextFieldActionPerformed
 
     private void saveSitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSitesActionPerformed
-        try{
+        try {
             boolean flag = false;
-            for(int i=0; i< websiteTabPane.getTabCount();i++){
-                WebsitePanel panel = (WebsitePanel)(websiteTabPane.getComponentAt(i));
+            for (int i = 0; i < websiteTabPane.getTabCount(); i++) {
+                WebsitePanel panel = (WebsitePanel) (websiteTabPane.getComponentAt(i));
                 Website site = null;
-                for(int j=0;j<Config.WEBSITES.size();j++){
+                for (int j = 0; j < Config.WEBSITES.size(); j++) {
                     site = Config.WEBSITES.get(j);
-                    if(site.getId()==panel.getId()){
+                    if (site.getId() == panel.getId()) {
                         flag = true;
                         break;
                     }
                 }
-                
-                
+
                 /*
-                    if flag = true ,website already exists and is contained in the site object
-                */
-                if(flag){
+                 if flag = true ,website already exists and is contained in the site object
+                 */
+                if (flag) {
                     site.setPort(panel.getPort());
                     site.setOnline(panel.isOnline());
                     site.setPath(panel.getPath());
                     site.setSsl(panel.isSSL());
                     site.setSslFile(panel.getSSLFile());
                     site.setSslPass(panel.getSSLPass());
-                    websiteTabPane.setTitleAt(i, site.getId()+"::"+site.getPort());
-                    try{
-                        if(site.isOnline())
+                    websiteTabPane.setTitleAt(i, site.getId() + "::" + site.getPort());
+                    try {
+                        if (site.isOnline()) {
                             site.resume();
-                        else
+                        } else {
                             site.pause();
-                    }catch(Exception e){}
-                }else{
-                    Website temp = new Website( panel.getPort(),panel.getPath(), panel.isSSL(), panel.isOnline(),panel.getSSLFile(),panel.getSSLPass());
-                    websiteTabPane.setTitleAt(i, temp.getId()+"::"+temp.getPort());
-                    if(temp.isOnline())
+                        }
+                    } catch (Exception e) {
+                    }
+                } else {
+                    Website temp = new Website(panel.getPort(), panel.getPath(), panel.isSSL(), panel.isOnline(), panel.getSSLFile(), panel.getSSLPass());
+                    websiteTabPane.setTitleAt(i, temp.getId() + "::" + temp.getPort());
+                    if (temp.isOnline()) {
                         temp.start();
-                    Config.WEBSITES.add(temp); 
+                    }
+                    Config.WEBSITES.add(temp);
                 }
                 flag = false;
             }
             Config.saveChanges();
-            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveSitesActionPerformed
 
@@ -876,12 +875,14 @@ public class ServerOptions extends javax.swing.JFrame {
 
     private void saveDefaultNamesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDefaultNamesButtonActionPerformed
         Config.DEFAULT_PAGES.clear();
-        for(int i=0;i<pageListModel.getSize();i++)
+        for (int i = 0; i < pageListModel.getSize(); i++) {
             Config.DEFAULT_PAGES.add(pageListModel.getElementAt(i).toString());
-        try{
+        }
+        try {
             Config.saveChanges();
-            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception e){}
+            JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_saveDefaultNamesButtonActionPerformed
 
     private void removeBlackListItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBlackListItemButtonActionPerformed
@@ -890,31 +891,33 @@ public class ServerOptions extends javax.swing.JFrame {
 
     private void saveBlackListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBlackListButtonActionPerformed
         Config.BLACK_LIST.clear();
-        for(int i=0;i<blackListModel.getSize();i++)
+        for (int i = 0; i < blackListModel.getSize(); i++) {
             Config.BLACK_LIST.add(blackListModel.getElementAt(i).toString());
-        try{
+        }
+        try {
             Config.saveChanges();
-            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception e){}
+            JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_saveBlackListButtonActionPerformed
 
     private void addBlackListItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBlackListItemButtonActionPerformed
-        if(ServerUtils.isNumeric(ipPart1.getText()) &&
-           ServerUtils.isNumeric(ipPart2.getText()) &&
-           ServerUtils.isNumeric(ipPart3.getText()) &&
-           ServerUtils.isNumeric(ipPart4.getText()) &&
-           Integer.parseInt(ipPart1.getText()) < 256 && Integer.parseInt(ipPart1.getText()) >=0 &&
-           Integer.parseInt(ipPart2.getText()) < 256 && Integer.parseInt(ipPart2.getText()) >=0 &&
-           Integer.parseInt(ipPart3.getText()) < 256 && Integer.parseInt(ipPart3.getText()) >=0 &&
-           Integer.parseInt(ipPart4.getText()) < 256 && Integer.parseInt(ipPart4.getText()) >=0){
-            
-            blackListModel.addElement(ipPart1.getText()+"."+ipPart2.getText()+"."+ipPart3.getText()+"."+ipPart4.getText());
-            
-        }else{
-            JOptionPane.showMessageDialog(null,"The ip is not valid , please enter a valid ip.", "IP is not valid", JOptionPane.WARNING_MESSAGE);
+        if (ServerUtils.isNumeric(ipPart1.getText())
+                && ServerUtils.isNumeric(ipPart2.getText())
+                && ServerUtils.isNumeric(ipPart3.getText())
+                && ServerUtils.isNumeric(ipPart4.getText())
+                && Integer.parseInt(ipPart1.getText()) < 256 && Integer.parseInt(ipPart1.getText()) >= 0
+                && Integer.parseInt(ipPart2.getText()) < 256 && Integer.parseInt(ipPart2.getText()) >= 0
+                && Integer.parseInt(ipPart3.getText()) < 256 && Integer.parseInt(ipPart3.getText()) >= 0
+                && Integer.parseInt(ipPart4.getText()) < 256 && Integer.parseInt(ipPart4.getText()) >= 0) {
+
+            blackListModel.addElement(ipPart1.getText() + "." + ipPart2.getText() + "." + ipPart3.getText() + "." + ipPart4.getText());
+
+        } else {
+            JOptionPane.showMessageDialog(null, "The ip is not valid , please enter a valid ip.", "IP is not valid", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_addBlackListItemButtonActionPerformed
 
     private void saveMethodsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMethodsButtonActionPerformed
@@ -926,78 +929,80 @@ public class ServerOptions extends javax.swing.JFrame {
         Config.PUT = putCheckBox.isSelected();
         Config.DELETE = deleteCheckBox.isSelected();
         Config.OPTIONS = optionsCheckBox.isSelected();
-        
-        try{
+
+        try {
             Config.saveChanges();
-            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveMethodsButtonActionPerformed
 
     private void savePHPSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePHPSettingsActionPerformed
         Config.PHP_ENABLED = phpEnable.isSelected();
         Config.PHP_PATH = phpPathTextfield.getText();
-        
-        try{
+
+        try {
             Config.saveChanges();
-            JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_savePHPSettingsActionPerformed
 
     private void phpBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phpBrowseButtonActionPerformed
         JFileChooser chooser;
-        if (Config.PHP_PATH != "") 
-            // if php path is set we set the choosers default directory the php path
+        if (Config.PHP_PATH != "") // if php path is set we set the choosers default directory the php path
+        {
             chooser = new JFileChooser(Config.PHP_PATH);
-        else
-            // else we point to the user's home directory
+        } else // else we point to the user's home directory
+        {
             chooser = new JFileChooser();
-        
-        if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+        }
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             phpPathTextfield.setText(chooser.getSelectedFile().getAbsolutePath());
         }
-        
+
     }//GEN-LAST:event_phpBrowseButtonActionPerformed
 
     private void addNewSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSiteButtonActionPerformed
-        websiteTabPane.addTab("-1:(new site)", new WebsitePanel("default", 60000, false, false,Website.ID++,"",""));
+        websiteTabPane.addTab("-1:(new site)", new WebsitePanel("default", 60000, false, false, Website.ID++, "", ""));
     }//GEN-LAST:event_addNewSiteButtonActionPerformed
 
     private void removeSiteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSiteButtonActionPerformed
-        
-        int choise = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this website?", "Remove site.", JOptionPane.YES_NO_OPTION , JOptionPane.QUESTION_MESSAGE);
-        
-        if(choise == JOptionPane.YES_OPTION){
+
+        int choise = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this website?", "Remove site.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (choise == JOptionPane.YES_OPTION) {
             int pos = -1;
-            for(int i=0;i<Config.WEBSITES.size();i++){
-                if(websiteTabPane.getTitleAt(websiteTabPane.getSelectedIndex()).split(":")[0].equals(String.valueOf(Config.WEBSITES.get(i).getId()))){
+            for (int i = 0; i < Config.WEBSITES.size(); i++) {
+                if (websiteTabPane.getTitleAt(websiteTabPane.getSelectedIndex()).split(":")[0].equals(String.valueOf(Config.WEBSITES.get(i).getId()))) {
                     pos = i;
                     break;
                 }
             }
-            
-            if(pos!=-1)
+
+            if (pos != -1) {
                 Config.WEBSITES.remove(pos);
+            }
             websiteTabPane.remove(websiteTabPane.getSelectedIndex());
-            
-            try{
+
+            try {
                 Config.saveChanges();
-                JOptionPane.showMessageDialog(null,"Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null,"Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Changes saved successfuly", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Something went wrong..", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_removeSiteButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonActionPerformed
-      
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBlackListItemButton;
