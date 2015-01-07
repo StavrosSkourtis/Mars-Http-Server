@@ -1,25 +1,24 @@
 <httpmethods >                                
-<method name="get" allow="true" ></method>
-<method name="post" allow="true" ></method>
-<method name="trace" allow="true" ></method>
-<method name="head" allow="true" ></method>
-<method name="put" allow="true" ></method>
-<method name="delete" allow="true" ></method>
-<method name="connect" allow="true" ></method>
-<method name="options" allow="true" ></method>
+	<method name="get" allow="true" ></method>
+	<method name="post" allow="true" ></method>
+	<method name="trace" allow="true" ></method>
+	<method name="head" allow="true" ></method>
+	<method name="put" allow="true" ></method>
+	<method name="delete" allow="true" ></method>
+	<method name="connect" allow="true" ></method>
+	<method name="options" allow="true" ></method>
 </httpmethods>
 <defaults >                    
-<page value="index.html" ></page>
-<page value="index.htm" ></page>
-<page value="default.html" ></page>
-<page value="default.htm" ></page>
-<page value="index.php" ></page>
+	<page value="index.html" ></page>
+	<page value="index.htm" ></page>
+	<page value="default.html" ></page>
+	<page value="default.htm" ></page>
+	<page value="index.php" ></page>
 </defaults>
-<php allow="true" path="C:\Program&Files&(x86)\PHP\v5.6\php-cgi.exe" ></php>
+	<php allow="true" path="C:\Program&Files&(x86)\PHP\v5.6\php-cgi.exe" ></php>
 <blacklist >    
-<ip address="192.168.1.1" ></ip>
+	<ip address="192.168.1.1" ></ip>
 </blacklist>
 <websites >        
-<site path="www" port="81" online="true" ssl="false" sslfile="" sslpass="" ></site>
-<site path="w2" port="8080" online="false" ssl="false" sslfile="server" sslpass="123456" ></site>
+	<site path="www" port="81" online="true" ssl="false" sslfile="" sslpass="" ></site>
 </websites>

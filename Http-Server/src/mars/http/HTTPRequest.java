@@ -73,7 +73,7 @@ public class HTTPRequest {
      * The request body as an array of bytes
      */
     public byte[] body;
-    
+
     /**
      * creates the request
      * @param root server root folder
@@ -86,6 +86,10 @@ public class HTTPRequest {
         this.hostname = client.getInetAddress().getHostName();
         this.port = client.getPort();
         absoluteRoot = new File(root).getAbsolutePath();
+    }
+    
+    public HTTPRequest(){
+        headers  = new ArrayList<HTTPHeader>();
     }
     
     
@@ -266,7 +270,7 @@ public class HTTPRequest {
         for(HTTPHeader header :headers){
             request += header.getName()+": "+header.getValue()+"\r\n";
         }
-        
+        request +="\r\n";
         return request;
     }
 }
