@@ -1,6 +1,4 @@
 <?php 
-	print "The php part works!!";
-       // print "get".$_GET['id'];
 
         print 'GET ';
         print_r($_GET);
@@ -10,15 +8,8 @@
         
 ?>
 
-<html>
-    <head>
-</head>
-    <body>
-        <p>The html part works!!</p>
 
-        <form method="post">
-        <input name="p" type="text">
-        <input type="submit" >
-        </form>
-    </body>
-</html>
+<form method="post" >
+	<input type="text" name="a">
+	<input type="submit" >
+<form>

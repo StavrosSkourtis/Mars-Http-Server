@@ -138,7 +138,9 @@ public class HTTPRequest {
      * @return body length , it can be 0 (no body)
      * @throws IOException 
      */
-    private int readRequestHeader(DataInputStream in) throws IOException{  
+    private int readRequestHeader(DataInputStream in) throws IOException{
+        
+
         /*
          *  First we read the Request line 
          *  we read chars until we find \r \n 
@@ -163,6 +165,7 @@ public class HTTPRequest {
             }else{
                 buffer +=tempChar;
             }
+            
         }
             
         String[] requestLine = buffer.split(" ");

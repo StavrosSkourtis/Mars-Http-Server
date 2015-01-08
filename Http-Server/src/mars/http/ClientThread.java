@@ -65,23 +65,24 @@ public class ClientThread extends Thread {
             boolean httpTunnel = false;
 
             do {
+
                 if (httpTunnel) {
-                    HTTPRequestHandler.tunnel(client, tunnelSocket);
+                   connection =  HTTPRequestHandler.tunnel(client, tunnelSocket);
+                
                 } else {
 
                     //Create a new HTTPRequest (an object that represents it , not an actual http request) and pass it the socket input stream;
                     HTTPRequest request = new HTTPRequest(root, client);
                     request.create(in);
-                    
 
                     // it parses the request and send back the response
                     HTTPRequestHandler requestProcess = new HTTPRequestHandler(request, out);
 
                     // create a response
                     requestProcess.process();
-
+                    
                     // returns true if keep alive , false if close or not exists
-                    connection = request.getHeader("connection") != null && request.getHeaderField("connection").equalsIgnoreCase("keep-alive");
+                    connection = request.getHeader("connection") == null || !request.getHeaderField("connection").equalsIgnoreCase("close");
 
                     if (request.method.equalsIgnoreCase("connect")) {
                         httpTunnel = true;
@@ -89,12 +90,13 @@ public class ClientThread extends Thread {
                         try {
                             String url[] = request.url.split("\\:");
                             tunnelSocket = new Socket(url[0], Integer.parseInt(url[1]));
-                            System.out.println("Everything's fine");
+                            Logger.addRecord("Tunneled");
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                            Logger.addRecord(e.getMessage());
                         }
                     }
                 }
+
             } while (connection);
 
             // close i/o and socket
@@ -103,7 +105,8 @@ public class ClientThread extends Thread {
             client.close();
         } catch (IOException e) {
             Logger.addRecord(e.getMessage());
+        } catch (Exception e) {
+            Logger.addRecord(e.getMessage());
         }
     }
-
 }

@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import static mars.http.HTTPStatus.*;
 import mars.utils.Config;
 import mars.utils.Logger;
-import sun.net.util.URLUtil;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -57,7 +56,7 @@ public class HTTPRequestHandler {
      * @param client
      * @param target
      */
-    public static void tunnel(Socket client, Socket target) {
+    public static boolean tunnel(Socket client, Socket target) {
         try {
             DataInputStream clientIn = new DataInputStream(client.getInputStream());
 
@@ -88,9 +87,10 @@ public class HTTPRequestHandler {
             // We send it back to the client
             DataOutputStream clientOut = new DataOutputStream(client.getOutputStream());
             response.send(clientOut);
-
+            
+            return request.getHeader("connection") == null || !request.getHeaderField("connection").equalsIgnoreCase("close");
         } catch (IOException e) {
-
+            return false;
         }
     }
 
@@ -398,19 +398,26 @@ public class HTTPRequestHandler {
 
         if (Config.GET) {
             allow += "GET";
-        } else if (Config.POST) {
+        } 
+        if (Config.POST) {
             allow += ",POST";
-        } else if (Config.HEAD) {
+        }
+        if (Config.HEAD) {
             allow += ",HEAD";
-        } else if (Config.TRACE) {
+        } 
+        if (Config.TRACE) {
             allow += ",TRACE";
-        } else if (Config.OPTIONS) {
+        }
+        if (Config.OPTIONS) {
             allow += ",OPTIONS";
-        } else if (Config.DELETE) {
+        } 
+        if (Config.DELETE) {
             allow += ",DELETE";
-        } else if (Config.PUT) {
+        }
+        if (Config.PUT) {
             allow += ",PUT";
-        } else if (Config.CONNECT) {
+        }
+        if (Config.CONNECT) {
             allow += ",CONNECT";
         }
 
